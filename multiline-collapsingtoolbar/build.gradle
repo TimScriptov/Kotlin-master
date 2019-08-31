@@ -4,7 +4,7 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-		applicationId 'net.opacapp.multilinecollapsingtoolbar'
+		//applicationId 'net.opacapp.multilinecollapsingtoolbar'
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 11
@@ -16,7 +16,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.android.material:material:1.1.0-alpha01'
+    implementation 'com.google.android.material:material:1.1.0-alpha09'
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }
