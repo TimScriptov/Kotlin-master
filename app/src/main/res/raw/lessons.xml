@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lessons>
+
+	<lesson>Lesson 1. Welcome to Kotlin!</lesson>
+	<lesson>Lesson 2. Basic syntax</lesson>
+	<lesson>Lesson 3. Variables</lesson>
+	<lesson>Lesson 4. Basic types</lesson>
+	<lesson>Lesson 5. Characters and strings</lesson>
+	<lesson>Lesson 6. Literal constants</lesson>
+	<lesson>Lesson 7. Output</lesson>
+	<lesson>Lesson 8. Input</lesson>
+	<lesson>Lesson 9. Comments</lesson>
+	<lesson>Lesson 10. Arithmetics operations</lesson>
+	<lesson>Lesson 11. Increment and decrement.</lesson>
+	<lesson>Lesson 12. String templates</lesson>
+	<lesson>Lesson 13. Practice time: basics</lesson>
+	<lesson>Lesson 14. Control flow: if and else</lesson>
+	<lesson>Lesson 15. The if-else-if chain</lesson>
+	<lesson>Lesson 16. Logical operators</lesson>
+	<lesson>Lesson 17. when xpression</lesson>
+	<lesson>Lesson 18. The while loop</lesson>
+	<lesson>Lesson 19. The do-while loop</lesson>
+	<lesson>Lesson 20. return, break and continue</lesson>
+	<lesson>Lesson 21. Arrays</lesson>
+	<lesson>Lesson 22. Ranges</lesson>
+	<lesson>Lesson 23. The for loop</lesson>
+	<lesson>Lesson 24. Using loops with arrays</lesson>
+	<lesson>Lesson 25. Practice time: loops and arrays</lesson>
+	<lesson>Lesson 26. Function</lesson>
+	<lesson>Lesson 27. Function parameters</lesson>
+	<lesson>Lesson 28. Function default arguments</lesson>
+	<lesson>Lesson 29. Type checks and automatic casts</lesson>
+	<lesson>Lesson 30. Nullable types</lesson>
+	<lesson>Lesson 31. Classes</lesson>
+	<lesson>Lesson 32. Properties</lesson>
+	<lesson>Lesson 33. Member functions</lesson>
+	<lesson>Lesson 34. Getters and setters</lesson>
+	<lesson>Lesson 35. Primary constructor</lesson>
+	<lesson>Lesson 36. Initializer block</lesson>
+</lessons>
