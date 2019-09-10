@@ -35,7 +35,7 @@ public class FileReader {
             while ((line = br.readLine()) != null) sb.append(line).append("\n");
             return sb.toString();
         } catch (Exception e) {
-            if(e instanceof SSLException){
+            if (e instanceof SSLException) {
                 try {
                     ProviderInstaller.installIfNeeded(App.getContext());
                     return fromUrl(url);

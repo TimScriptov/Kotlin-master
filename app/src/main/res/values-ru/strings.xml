@@ -47,7 +47,7 @@
     <string name="ads_blocked">Мы определили, что вы блокируете рекламу!  Вы не можете использовать это приложение без рекламы, если вы не купили Премиум!</string>
 	<string name="buy">Buy</string>
 	<string name="offline">Оффлайн</string>
-	<string name="downloading">Загрузка</string>
+	<string name="downloading">Загрузка...</string>
 	<string name="only_prem">Доступно только Premium пользователям!</string>
 
 </resources>

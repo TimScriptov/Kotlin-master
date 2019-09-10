@@ -13,6 +13,7 @@ import es.dmoral.toasty.Toasty;
 
 public class App extends Application {
 
+    public static SharedPreferences preferences;
     @SuppressLint("StaticFieldLeak")
     private static Context context;
 
@@ -20,7 +21,13 @@ public class App extends Application {
         return context;
     }
 
-    public static SharedPreferences preferences;
+    public static void toast(String msg) {
+        Toasty.info(context, msg).show();
+    }
+
+    public static void toast(int res) {
+        Toasty.info(context, context.getResources().getString(res)).show();
+    }
 
     @Override
     public void onCreate() {
@@ -29,13 +36,5 @@ public class App extends Application {
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         Ads.initialize(this);
         new Database();
-    }
-
-    public static void toast(String msg){
-        Toasty.info(context, msg).show();
-    }
-
-    public static void toast(int res){
-        Toasty.info(context, context.getResources().getString(res)).show();
     }
 }

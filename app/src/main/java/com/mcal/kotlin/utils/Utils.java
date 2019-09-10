@@ -11,7 +11,7 @@ public class Utils {
     public static boolean isNetworkAvailable() {
         ConnectivityManager connection = (ConnectivityManager) App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = connection.getActiveNetworkInfo();
-        if(info == null) return false;
+        if (info == null) return false;
         else return info.isConnected();
     }
 
@@ -21,12 +21,10 @@ public class Utils {
     }
 
     public static String reverseString(String string) {
-        try{
+        try {
             return new StringBuilder(string).reverse().toString();
-        }catch (Exception e){
+        } catch (Exception e) {
             return "";
         }
     }
-
 }
-

@@ -12,10 +12,10 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.mcal.kotlin.App;
 import com.mcal.kotlin.R;
+import com.mcal.kotlin.data.Constants;
 import com.mcal.kotlin.data.Preferences;
 
 import static com.mcal.kotlin.data.Constants.RATE;
-import com.mcal.kotlin.data.*;
 
 public class Dialogs {
     public static void noConnectionError(Context c) {
@@ -43,7 +43,7 @@ public class Dialogs {
                 .setPositiveButton(R.string.rate, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface p1, int p2) {
-                        if(ratingBar.getRating() > 3) {
+                        if (ratingBar.getRating() > 3) {
                             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(RATE)));
                             Preferences.setRated();
                         } else {

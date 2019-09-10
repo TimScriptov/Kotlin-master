@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -18,6 +17,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,7 +25,6 @@ import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.BillingProcessor.IBillingHandler;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.material.navigation.NavigationView;
-import com.mcal.kotlin.adapters.GridAdapter;
 import com.mcal.kotlin.adapters.ListAdapter;
 import com.mcal.kotlin.data.ListMode;
 import com.mcal.kotlin.data.NightMode;
@@ -53,7 +52,6 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
     private LinearLayout adLayout;
     private BillingProcessor billing;
     private ListAdapter listAdapter;
-    private GridAdapter gridAdapter;
     private Ads ads;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -66,9 +64,7 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
 
     @Override
     public boolean onQueryTextChange(String p1) {
-        if (listAdapter != null) {
-            listAdapter.getFilter().filter(p1);
-        } else gridAdapter.getFilter().filter(p1);
+        listAdapter.getFilter().filter(p1);
         return false;
     }
 
@@ -107,9 +103,10 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
         navigationView.setNavigationItemSelectedListener(this);
 
         if (ListMode.getCurrentMode().equals(ListMode.Mode.GRID)) {
-            GridView gridLessons = (GridView) getLayoutInflater().inflate(R.layout.grid_view, null);
-            gridLessons.setAdapter(gridAdapter = new ListParser(this).getGridAdapter());
-            ((LinearLayout) findViewById(R.id.listContainer)).addView(gridLessons);
+            RecyclerView lessons = (RecyclerView) getLayoutInflater().inflate(R.layout.recycler_view, null);
+            lessons.setLayoutManager(new GridLayoutManager(this, 3));
+            lessons.setAdapter(listAdapter = new ListParser(this).getListAdapter());
+            ((LinearLayout) findViewById(R.id.listContainer)).addView(lessons);
         } else {
             RecyclerView lessons = (RecyclerView) getLayoutInflater().inflate(R.layout.recycler_view, null);
             lessons.setLayoutManager(new LinearLayoutManager(this));
@@ -199,9 +196,7 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
             if (resultCode == RESULT_OK) {
                 int position = data.getIntExtra("position", 0);
 
-                if (listAdapter != null) {
-                    listAdapter.notifyItemChanged(position);
-                } else gridAdapter.notifyDataSetChanged();
+                listAdapter.notifyItemChanged(position);
             }
 
             if (!Preferences.isRated()) Dialogs.rate(this);

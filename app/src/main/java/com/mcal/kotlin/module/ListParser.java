@@ -2,8 +2,8 @@ package com.mcal.kotlin.module;
 
 import com.mcal.kotlin.App;
 import com.mcal.kotlin.R;
-import com.mcal.kotlin.adapters.GridAdapter;
 import com.mcal.kotlin.adapters.ListAdapter;
+import com.mcal.kotlin.data.Constants;
 import com.mcal.kotlin.view.MainView;
 
 import org.w3c.dom.Document;
@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import com.mcal.kotlin.data.*;
 
 public class ListParser {
     private ArrayList<String> items = new ArrayList<>();
@@ -36,10 +35,6 @@ public class ListParser {
             } catch (Exception ignored) {
             }
         }
-    }
-
-    public GridAdapter getGridAdapter() {
-        return new GridAdapter(items, mainView);
     }
 
     public ListAdapter getListAdapter() {

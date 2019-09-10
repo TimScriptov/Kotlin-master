@@ -16,6 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.mcal.kotlin.data.Bookmarks;
+import com.mcal.kotlin.data.Constants;
 import com.mcal.kotlin.data.Preferences;
 import com.mcal.kotlin.model.BaseActivity;
 import com.mcal.kotlin.module.Dialogs;
@@ -35,7 +36,6 @@ import static com.mcal.kotlin.data.Constants.getResPath;
 import static com.mcal.kotlin.data.Preferences.isOffline;
 import static com.mcal.kotlin.utils.LessonUtils.getLessonNumberByUrl;
 import static com.mcal.kotlin.utils.LessonUtils.isRead;
-import com.mcal.kotlin.data.*;
 
 public class LessonActivity extends BaseActivity implements OnClickListener {
     private MCProgressBar progressBar;

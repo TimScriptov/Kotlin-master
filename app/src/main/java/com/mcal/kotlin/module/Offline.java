@@ -50,7 +50,7 @@ public class Offline extends AsyncTask<Void, Integer, Boolean> {
         if (Preferences.isOffline()) {
             new AlertDialog.Builder(settingsActivity)
                     .setMessage("Отключить оффлайн и удалить ресурсы?")
-                    .setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
@@ -66,7 +66,7 @@ public class Offline extends AsyncTask<Void, Integer, Boolean> {
                             Toasty.warning(settingsActivity, "Ресурсы удалены").show();
                         }
                     })
-                    .setNegativeButton("Нет", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
@@ -79,7 +79,7 @@ public class Offline extends AsyncTask<Void, Integer, Boolean> {
             progressDialog.setTitle("Загрузка");
             progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             progressDialog.setCancelable(false);
-            progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Отмена", new DialogInterface.OnClickListener() {
+            progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, settingsActivity.getString(android.R.string.cancel), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     cancel(true);

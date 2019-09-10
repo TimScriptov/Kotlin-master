@@ -32,7 +32,7 @@ public class AppUpdater extends AsyncTask<Void, Void, Void> {
     @SuppressLint("StaticFieldLeak")
     private Context context;
 
-    public AppUpdater(Context context){
+    public AppUpdater(Context context) {
         this.context = context;
     }
 

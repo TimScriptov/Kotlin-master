@@ -60,7 +60,7 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
                 if (preferences.getBoolean(key, false) && isVip) {
                     if (Utils.isNetworkAvailable()) {
                         final ProgressDialog progressDialog = new ProgressDialog(this);
-                        progressDialog.setTitle("Downloading...");
+                        progressDialog.setTitle(getString(R.string.downloading));
                         new Offline(this).execute();
                     } else {
                         Dialogs.noConnectionError(this);
