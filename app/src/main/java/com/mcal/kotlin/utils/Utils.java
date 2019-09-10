@@ -21,7 +21,11 @@ public class Utils {
     }
 
     public static String reverseString(String string) {
-        return new StringBuilder(string).reverse().toString();
+        try{
+            return new StringBuilder(string).reverse().toString();
+        }catch (Exception e){
+            return "";
+        }
     }
 
 }

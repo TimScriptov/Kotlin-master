@@ -119,8 +119,8 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
 
         ads = new Ads();
         billing = new BillingProcessor(this, LK, MI, this);
-        if(savedInstanceState == null)
-        drawerLayout.openDrawer(GravityCompat.START);
+        if (savedInstanceState == null)
+            drawerLayout.openDrawer(GravityCompat.START);
         new AppUpdater(this).execute();
     }
 
@@ -138,7 +138,8 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
         sv.setOnQueryTextListener(this);
         ((MenuBuilder) menu).setOptionalIconsVisible(true);
 
-        if(NightMode.getCurrentMode() == NightMode.Mode.DAY) menu.findItem(R.id.day_night).setIcon(R.drawable.ic_night);
+        if (NightMode.getCurrentMode() == NightMode.Mode.DAY)
+            menu.findItem(R.id.day_night).setIcon(R.drawable.ic_night);
 
         menu.findItem(R.id.search).setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
@@ -163,11 +164,10 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.day_night:
-                if(NightMode.getCurrentMode() == NightMode.Mode.DAY){
+                if (NightMode.getCurrentMode() == NightMode.Mode.DAY) {
                     NightMode.setMode(NightMode.Mode.NIGHT);
                     Preferences.setNightMode(true);
-                }
-                else {
+                } else {
                     NightMode.setMode(NightMode.Mode.DAY);
                     Preferences.setNightMode(false);
                 }
@@ -218,7 +218,7 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
 
     @Override
     public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
-		Toasty.success(this, getString(R.string.p_a)).show();// premium_activated
+        Toasty.success(this, getString(R.string.p_a)).show();// premium_activated
     }
 
     @Override
@@ -230,7 +230,7 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
     public void onBillingError(int errorCode, @Nullable Throwable error) {
         if (errorCode == BILLING_RESPONSE_RESULT_USER_CANCELED) {
             Toasty.error(this, getString(R.string.purchase_canceled)).show();
-            if(isAdsBlocked) System.exit(0);
+            if (isAdsBlocked) System.exit(0);
         }
     }
 
@@ -239,8 +239,8 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
         if (!billing.isPurchased(PREMIUM)) {
             adLayout.addView(ads.getBanner(this));
             ads.loadInterstitial(this);
-			navigationView.getMenu().findItem(R.id.b_p).setVisible(true);//buy_premium
-            if(!billing.isPurchased(PREMIUM) & !ads.isAdsLoading()){
+            navigationView.getMenu().findItem(R.id.b_p).setVisible(true);//buy_premium
+            if (!billing.isPurchased(PREMIUM) & !ads.isAdsLoading()) {
                 isAdsBlocked = true;
                 adsBlocked();
             }
@@ -262,14 +262,14 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
             case R.id.exit:
                 finish();
                 break;
-			case R.id.b_p://buy_premium
+            case R.id.b_p://buy_premium
                 billing.purchase(this, PREMIUM, PREMIUM);
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    public void adsBlocked(){
+    public void adsBlocked() {
         new AlertDialog.Builder(this)
                 .setMessage(R.string.ads_blocked)
                 .setPositiveButton(R.string.buy, new DialogInterface.OnClickListener() {

@@ -16,19 +16,14 @@
         android:resizeableActivity="true">
 
         <activity
-            android:theme="@style/Theme.AppCompat"
-            android:name=".SplashActivity"
-            android:configChanges="screenSize|orientation">
+            android:configChanges="screenSize|orientation"
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:configChanges="screenSize|orientation"
-            android:name=".MainActivity"/>
 
         <activity
             android:configChanges="screenSize|orientation"
