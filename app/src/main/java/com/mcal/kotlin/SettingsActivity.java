@@ -26,7 +26,7 @@ import static com.mcal.kotlin.data.Constants.IS_PREMIUM;
 public class SettingsActivity extends BaseActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private SharedPreferences prefs;
     private MaterialSwitchPreference offline;
-    private boolean isVip;
+    private boolean isPremium;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        isVip = getIntent().getBooleanExtra(IS_PREMIUM, false);
+        isPremium = getIntent().getBooleanExtra(IS_PREMIUM, false);
         offline = findViewById(R.id.offline);
     }
 
@@ -57,7 +57,7 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
     public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
         switch (key) {
             case "offline":
-                if (preferences.getBoolean(key, false) && isVip) {
+                if (preferences.getBoolean(key, true) && isPremium) {
                     if (Utils.isNetworkAvailable()) {
                         final ProgressDialog progressDialog = new ProgressDialog(this);
                         progressDialog.setTitle(getString(R.string.downloading));
@@ -65,7 +65,7 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
                     } else {
                         Dialogs.noConnectionError(this);
                     }
-                } else if (isVip) {
+                } else if (isPremium) {
                     AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {

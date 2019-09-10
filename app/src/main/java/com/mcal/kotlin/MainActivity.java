@@ -43,7 +43,6 @@ import es.dmoral.toasty.Toasty;
 import static com.anjlab.android.iab.v3.Constants.BILLING_RESPONSE_RESULT_USER_CANCELED;
 import static com.mcal.kotlin.data.Constants.IS_PREMIUM;
 import static com.mcal.kotlin.data.Constants.LK;
-import static com.mcal.kotlin.data.Constants.MI;
 import static com.mcal.kotlin.data.Constants.PREMIUM;
 import static com.mcal.kotlin.data.Preferences.isOffline;
 
@@ -101,21 +100,20 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        RecyclerView lessons = (RecyclerView) getLayoutInflater().inflate(R.layout.recycler_view, null);
 
         if (ListMode.getCurrentMode().equals(ListMode.Mode.GRID)) {
-            RecyclerView lessons = (RecyclerView) getLayoutInflater().inflate(R.layout.recycler_view, null);
             lessons.setLayoutManager(new GridLayoutManager(this, 3));
             lessons.setAdapter(listAdapter = new ListParser(this).getListAdapter());
             ((LinearLayout) findViewById(R.id.listContainer)).addView(lessons);
         } else {
-            RecyclerView lessons = (RecyclerView) getLayoutInflater().inflate(R.layout.recycler_view, null);
             lessons.setLayoutManager(new LinearLayoutManager(this));
             lessons.setAdapter(listAdapter = new ListParser(this).getListAdapter());
             ((LinearLayout) findViewById(R.id.listContainer)).addView(lessons);
         }
 
         ads = new Ads();
-        billing = new BillingProcessor(this, LK, MI, this);
+        billing = new BillingProcessor(this, LK, this);
         if (savedInstanceState == null)
             drawerLayout.openDrawer(GravityCompat.START);
         new AppUpdater(this).execute();
@@ -214,6 +212,7 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
     @Override
     public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
         Toasty.success(this, getString(R.string.p_a)).show();// premium_activated
+        navigationView.getMenu().findItem(R.id.b_p).setVisible(false);
     }
 
     @Override
@@ -258,7 +257,7 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
                 finish();
                 break;
             case R.id.b_p://buy_premium
-                billing.purchase(this, PREMIUM, PREMIUM);
+                billing.purchase(this, PREMIUM);
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -270,7 +269,7 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
                 .setPositiveButton(R.string.buy, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        billing.purchase(MainActivity.this, PREMIUM, PREMIUM);
+                        billing.purchase(MainActivity.this, PREMIUM);
                     }
                 })
                 .setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {

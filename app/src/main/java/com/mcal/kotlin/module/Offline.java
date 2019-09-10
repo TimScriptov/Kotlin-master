@@ -4,13 +4,10 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 
-import androidx.appcompat.app.AlertDialog;
-
 import com.mcal.kotlin.SettingsActivity;
 import com.mcal.kotlin.data.Preferences;
 
 import org.zeroturnaround.zip.ZipUtil;
-import org.zeroturnaround.zip.commons.FileUtilsV2_2;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -36,59 +33,29 @@ public class Offline extends AsyncTask<Void, Integer, Boolean> {
         progressDialog = new ProgressDialog(settingsActivity);
     }
 
-    private void deleteResources() {
+    /*private void deleteResources() {
         try {
             File resourcesDir = new File(settingsActivity.getPackageName(), "resources");
             FileUtilsV2_2.deleteDirectory(resourcesDir);
         } catch (IOException e) {
         }
-    }
+    }*/
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        if (Preferences.isOffline()) {
-            new AlertDialog.Builder(settingsActivity)
-                    .setMessage("Отключить оффлайн и удалить ресурсы?")
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.dismiss();
-
-                            execute(new Runnable() {
-                                @Override
-                                public void run() {
-                                    deleteResources();
-                                }
-                            });
-
-                            Preferences.setOffline(false);
-                            Toasty.warning(settingsActivity, "Ресурсы удалены").show();
-                        }
-                    })
-                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.dismiss();
-                            cancel(true);
-                        }
-                    })
-                    .setCancelable(false)
-                    .show();
-        } else {
-            progressDialog.setTitle("Загрузка");
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            progressDialog.setCancelable(false);
-            progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, settingsActivity.getString(android.R.string.cancel), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    cancel(true);
-                    dialogInterface.dismiss();
-                    Preferences.setOffline(false);
-                }
-            });
-            progressDialog.show();
-        }
+        progressDialog.setTitle("Загрузка");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setCancelable(false);
+        progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, settingsActivity.getString(android.R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                cancel(true);
+                dialogInterface.dismiss();
+                Preferences.setOffline(false);
+            }
+        });
+        progressDialog.show();
     }
 
     @Override

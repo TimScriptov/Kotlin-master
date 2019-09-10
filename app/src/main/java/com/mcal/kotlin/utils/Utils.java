@@ -20,6 +20,24 @@ public class Utils {
         return new String(data);
     }
 
+    public static String xor(String a)
+    {
+        char[] ax = new char[]{'\u3005', '\u3006'};
+        try
+        {
+            StringBuilder output = new StringBuilder();
+            for (int i = 0; i < a.length(); i++)
+            {
+                output.append((char) (a.charAt(i) ^ ax[i % ax.length]));
+            }
+            return output.toString();
+        }
+        catch (Exception ex)
+        {
+            return "";
+        }
+    }
+
     public static String reverseString(String string) {
         try {
             return new StringBuilder(string).reverse().toString();

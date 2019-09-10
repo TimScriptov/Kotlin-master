@@ -32,6 +32,7 @@ import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
 
 import java.util.concurrent.TimeUnit;
 
+import static com.mcal.kotlin.data.Constants.IS_PREMIUM;
 import static com.mcal.kotlin.data.Constants.getResPath;
 import static com.mcal.kotlin.data.Preferences.isOffline;
 import static com.mcal.kotlin.utils.LessonUtils.getLessonNumberByUrl;
@@ -43,6 +44,9 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
     private FloatingActionButton prev_lesson, next_lesson, bookmark;
     private CollapsingToolbarLayout ctl;
     private int itemPosition;
+
+    //private SharedPreferences prefs;
+    private boolean isPremium;
 
     @Override
     public void onClick(View p1) {
@@ -102,6 +106,8 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
         itemPosition = getIntent().getIntExtra("position", 0);
 
         new PageLoader(getIntent().getStringExtra("url")).execute();
+
+        isPremium = getIntent().getBooleanExtra(IS_PREMIUM, false);
     }
 
     @Override
@@ -193,9 +199,9 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
             super.onPreExecute();
             progressBar.setVisibility(View.VISIBLE);
 
-            if (isOffline()) {
+            if (isOffline() & isPremium & SignatureUtils.verifySignatureSHA(App.getContext())) {
                 link = "file:///" + link;
-                webView.loadDataWithBaseURL(link, new HtmlRenderer().renderHtml(FileReader.fromStorage(link.replace("file:///", ""))), "text/html", "UTF-8", link);
+                webView.loadDataWithBaseURL(link, HtmlRenderer.renderHtml(FileReader.fromStorage(link.replace("file:///", ""))), "text/html", "UTF-8", link);
                 cancel(true);
             }
         }
