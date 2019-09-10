@@ -1,6 +1,7 @@
 package com.mcal.kotlin;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -81,11 +82,17 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
                 }
                 break;
             case "fullscreen_mode":
-                recreate();
+                //recreate();
+                Intent fullscreen_mode = getIntent();
+                finish();
+                startActivity(fullscreen_mode);
                 break;
             case "night_mode":
                 NightMode.setMode(NightMode.getCurrentMode());
-                recreate();
+                //recreate();
+                Intent night_mode = getIntent();
+                finish();
+                startActivity(night_mode);
                 break;
             case "grid_mode":
                 setResult(RESULT_OK);
