@@ -11,24 +11,15 @@ import androidx.appcompat.widget.Toolbar;
 import com.mcal.kotlin.data.NightMode;
 import com.mcal.kotlin.model.BaseActivity;
 import com.mcal.kotlin.module.Dialogs;
+import com.mcal.kotlin.module.Offline;
 import com.mcal.kotlin.utils.Utils;
 import com.yarolegovich.mp.MaterialSwitchPreference;
 
-import org.zeroturnaround.zip.ZipUtil;
 import org.zeroturnaround.zip.commons.FileUtils;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 
-import static com.mcal.kotlin.data.Constants.DOWNLOAD_ZIP;
 import static com.mcal.kotlin.data.Constants.IS_PREMIUM;
 
 public class SettingsActivity extends BaseActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -69,45 +60,7 @@ public class SettingsActivity extends BaseActivity implements SharedPreferences.
                     if (Utils.isNetworkAvailable()) {
                         final ProgressDialog progressDialog = new ProgressDialog(this);
                         progressDialog.setTitle("Downloading...");
-                        new Thread(){
-                            @Override
-                            public void run() {
-                                super.run();
-                                try {
-                                    URL url = new URL(DOWNLOAD_ZIP);
-                                    URLConnection connection = url.openConnection();
-
-                                    progressDialog.setMax(connection.getContentLength());
-                                    progressDialog.show();
-
-                                    File offline = new File(getFilesDir(), "offline.zip");
-                                    File resourcesDir = new File(getFilesDir(), "resources");
-
-                                    InputStream inputStream = new BufferedInputStream(connection.getInputStream());
-                                    OutputStream outputStream = new FileOutputStream(offline);
-
-                                    int count;
-                                    byte[] data = new byte[1024];
-
-                                    while ((count = inputStream.read(data)) != -1) {
-                                        progressDialog.incrementProgressBy(count);
-                                        outputStream.write(data, 0, count);
-                                    }
-                                    inputStream.close();
-                                    outputStream.flush();
-
-                                    ZipUtil.unpack(offline, resourcesDir);
-                                    offline.delete();
-                                    progressDialog.dismiss();
-                                } catch (FileNotFoundException e) {
-                                    e.printStackTrace();
-                                } catch (MalformedURLException e) {
-                                    e.printStackTrace();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }.start();
+                        new Offline(this).execute();
                     } else {
                         Dialogs.noConnectionError(this);
                     }
