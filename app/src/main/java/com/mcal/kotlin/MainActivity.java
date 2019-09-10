@@ -41,11 +41,11 @@ import com.mcal.kotlin.view.MainView;
 
 import es.dmoral.toasty.Toasty;
 
+import static com.anjlab.android.iab.v3.Constants.BILLING_RESPONSE_RESULT_USER_CANCELED;
 import static com.mcal.kotlin.data.Constants.IS_PREMIUM;
 import static com.mcal.kotlin.data.Constants.LK;
 import static com.mcal.kotlin.data.Constants.MI;
 import static com.mcal.kotlin.data.Constants.PREMIUM;
-import static com.anjlab.android.iab.v3.data.Constants.BILLING_RESPONSE_RESULT_USER_CANCELED;
 import static com.mcal.kotlin.data.Preferences.isOffline;
 
 public class MainActivity extends BaseActivity implements MainView, SearchView.OnQueryTextListener, IBillingHandler, NavigationView.OnNavigationItemSelectedListener {

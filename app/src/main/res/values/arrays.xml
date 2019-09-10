@@ -24,6 +24,17 @@
 		<item>fr</item>
 		<item>zh-CN</item>
 	</string-array>
+
+	<string-array name="fonts" formatted="false">
+		<item>Aaargh_Cyrillic.ttf</item>
+		<item>Cuprum.ttf</item>
+		<item>DroidSans.ttf</item>
+		<item>DroidSansMono.ttf</item>
+		<item>GrotesqueMT.otf</item>
+		<item>NotoSerif-Regular.ttf</item>
+		<item>PT_Sans.ttf</item>
+		<item>Yandex.ttf</item>
+	</string-array>
 	
 	<string-array name="font_size" formatted="false">
 		<item>80%</item>

@@ -1,17 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
-	
-	<include
-		layout="@layout/toolbar"/>
-	
-	<fragment
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:name="com.mcal.kotlin.view.SettingsFragment"
-		android:id="@+id/settingsfragment"/>
-	
+
+    <include layout="@layout/toolbar" />
+
+    <com.yarolegovich.mp.MaterialPreferenceScreen
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.yarolegovich.mp.MaterialPreferenceCategory
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mpc_title="@string/general">
+
+            <com.yarolegovich.mp.MaterialChoicePreference
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:mp_default_value="ru"
+                app:mp_entry_descriptions="@array/languages"
+                app:mp_entry_values="@array/language_values"
+                app:mp_icon="@drawable/ic_language"
+                app:mp_key="lang"
+                app:mp_title="@string/content_language" />
+
+        </com.yarolegovich.mp.MaterialPreferenceCategory>
+
+        <com.yarolegovich.mp.MaterialPreferenceCategory
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mpc_title="@string/appearance">
+
+            <com.yarolegovich.mp.MaterialSwitchPreference
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:mp_default_value="false"
+                app:mp_icon="@drawable/ic_grid"
+                app:mp_key="grid_mode"
+                app:mp_title="@string/grid_view" />
+
+            <com.yarolegovich.mp.MaterialSwitchPreference
+                android:id="@+id/offline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:mp_default_value="false"
+                app:mp_icon="@drawable/ic_offline"
+                app:mp_key="offline"
+                app:mp_title="@string/offline" />
+
+            <com.yarolegovich.mp.MaterialSwitchPreference
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:mp_default_value="false"
+                app:mp_icon="@drawable/ic_fullscreen"
+                app:mp_key="fullscreen_mode"
+                app:mp_title="@string/fullscreen_mode" />
+
+            <com.yarolegovich.mp.MaterialSwitchPreference
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:mp_default_value="false"
+                app:mp_icon="@drawable/ic_daynight"
+                app:mp_key="night_mode"
+                app:mp_title="@string/night_mode" />
+
+        </com.yarolegovich.mp.MaterialPreferenceCategory>
+
+        <com.yarolegovich.mp.MaterialPreferenceCategory
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mpc_title="@string/font">
+
+            <com.yarolegovich.mp.MaterialChoicePreference
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:mp_default_value="100%"
+                app:mp_entry_values="@array/font_size"
+                app:mp_icon="@drawable/ic_fontsize"
+                app:mp_key="font_size"
+                app:mp_title="@string/font_size" />
+
+            <com.yarolegovich.mp.MaterialChoicePreference
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:mp_default_value="PT_Sans.ttf"
+                app:mp_entry_values="@array/fonts"
+                app:mp_icon="@drawable/ic_font"
+                app:mp_key="font"
+                app:mp_title="@string/font" />
+
+        </com.yarolegovich.mp.MaterialPreferenceCategory>
+
+    </com.yarolegovich.mp.MaterialPreferenceScreen>
+
+
 </LinearLayout>
