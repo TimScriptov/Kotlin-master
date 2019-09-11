@@ -159,7 +159,7 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
             super.onPageStarted(view, url, favicon);
 
             prev_lesson.setVisibility(getLessonNumberByUrl(url) != 1 ? View.VISIBLE : View.GONE);
-            next_lesson.setVisibility(getLessonNumberByUrl(url) != 182 ? View.VISIBLE : View.GONE);
+            next_lesson.setVisibility(getLessonNumberByUrl(url) != 36 ? View.VISIBLE : View.GONE);
         }
 
         @Override
