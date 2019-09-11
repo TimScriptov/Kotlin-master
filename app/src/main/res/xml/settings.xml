@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory android:title="@string/general">
+    <androidx.preference.PreferenceCategory android:title="@string/general">
 
-        <ListPreference
+        <androidx.preference.ListPreference
             android:defaultValue="ru"
             android:dialogTitle="@string/choose_language"
             android:entries="@array/languages"
@@ -13,39 +13,39 @@
             android:key="lang"
             android:title="@string/content_language" />
 
-    </PreferenceCategory>
+    </androidx.preference.PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/appearance">
+    <androidx.preference.PreferenceCategory android:title="@string/appearance">
 
-        <SwitchPreference
+        <androidx.preference.SwitchPreference
             android:defaultValue="false"
             android:icon="@drawable/ic_grid"
             android:key="grid_mode"
             android:title="@string/grid_view" />
 
-        <SwitchPreference
+        <androidx.preference.SwitchPreference
             android:defaultValue="false"
             android:icon="@drawable/ic_offline"
             android:key="offline"
             android:title="@string/offline" />
 
-        <SwitchPreference
+        <androidx.preference.SwitchPreference
             android:defaultValue="false"
             android:icon="@drawable/ic_fullscreen"
             android:key="fullscreen_mode"
             android:title="@string/fullscreen_mode" />
 
-        <SwitchPreference
+        <androidx.preference.SwitchPreference
             android:defaultValue="false"
             android:icon="@drawable/ic_daynight"
             android:key="night_mode"
             android:title="@string/night_mode" />
 
-    </PreferenceCategory>
+    </androidx.preference.PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/font">
+    <androidx.preference.PreferenceCategory android:title="@string/font">
 
-        <ListPreference
+        <androidx.preference.ListPreference
             android:defaultValue="100%"
             android:dialogTitle="@string/select_font_size"
             android:entries="@array/font_size"
@@ -54,13 +54,13 @@
             android:key="font_size"
             android:title="@string/font_size" />
 
-        <ListPreference
+        <androidx.preference.ListPreference
             android:defaultValue="fonts/DroidSans.ttf"
             android:entries="@array/fonts"
             android:icon="@drawable/ic_font"
             android:key="font"
             android:title="@string/font_type" />
 
-    </PreferenceCategory>
+    </androidx.preference.PreferenceCategory>
 
-</PreferenceScreen>
+</androidx.preference.PreferenceScreen>
