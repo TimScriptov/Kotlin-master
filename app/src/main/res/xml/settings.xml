@@ -2,7 +2,8 @@
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.preference.PreferenceCategory android:title="@string/general">
+    <androidx.preference.PreferenceCategory android:title="@string/general"
+        android:layout="@layout/preference_category_custom">
 
         <androidx.preference.ListPreference
             android:defaultValue="ru"
@@ -15,7 +16,8 @@
 
     </androidx.preference.PreferenceCategory>
 
-    <androidx.preference.PreferenceCategory android:title="@string/appearance">
+    <androidx.preference.PreferenceCategory android:title="@string/appearance"
+        android:layout="@layout/preference_category_custom">
 
         <androidx.preference.SwitchPreference
             android:defaultValue="false"
@@ -43,7 +45,8 @@
 
     </androidx.preference.PreferenceCategory>
 
-    <androidx.preference.PreferenceCategory android:title="@string/font">
+    <androidx.preference.PreferenceCategory android:title="@string/font"
+        android:layout="@layout/preference_category_custom">
 
         <androidx.preference.ListPreference
             android:defaultValue="100%"
