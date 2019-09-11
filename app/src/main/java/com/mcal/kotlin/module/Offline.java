@@ -1,5 +1,6 @@
 package com.mcal.kotlin.module;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
@@ -28,10 +29,10 @@ import static com.mcal.kotlin.data.Constants.OFFLINE_ZIP;
 import static com.mcal.kotlin.data.Constants.RESOURCES;
 
 public class Offline extends AsyncTask<Void, Integer, Boolean> {
-    private SettingsActivity settingsActivity;
+    private Activity settingsActivity;
     private ProgressDialog progressDialog;
 
-    public Offline(SettingsActivity settingsActivity) {
+    public Offline(Activity settingsActivity) {
         this.settingsActivity = settingsActivity;
         progressDialog = new ProgressDialog(settingsActivity);
     }
