@@ -84,6 +84,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
                 break;
             case "grid_mode":
                 requireActivity().setResult(RESULT_OK);
+                break;
         }
     }
 

@@ -2,7 +2,7 @@ package com.elmurzaev.fontpreference;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.preference.ListPreference;
+import androidx.preference.ListPreference;
 import android.util.AttributeSet;
 
 import java.util.ArrayList;
@@ -22,7 +22,8 @@ public class FontPreference extends ListPreference {
             if (fonts.isEmpty()) {
                 throw new IllegalStateException("FontPreference could not find any fonts in the assets/fonts folder.");
             }
-        }catch (Exception ignored){
+        }catch (Exception e){
+            e.printStackTrace()
         }
     }
 

@@ -58,8 +58,9 @@
             android:title="@string/font_size" />
 
         <androidx.preference.ListPreference
-            android:defaultValue="fonts/DroidSans.ttf"
+            android:defaultValue="2"
             android:entries="@array/fonts"
+            android:entryValues="@array/fonts"
             android:icon="@drawable/ic_font"
             android:key="font"
             android:title="@string/font_type" />
