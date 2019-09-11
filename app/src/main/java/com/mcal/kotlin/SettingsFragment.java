@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreference;
 
+import com.mcal.kotlin.data.Constants;
 import com.mcal.kotlin.data.NightMode;
 import com.mcal.kotlin.module.Dialogs;
 import com.mcal.kotlin.module.Offline;
@@ -64,7 +65,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
                         @Override
                         public void run() {
                             try {
-                                File resourcesDir = new File(requireActivity().getFilesDir(), "resources");
+                                File resourcesDir = new File(requireActivity().getFilesDir(), Constants.RESOURCES);
                                 FileUtils.deleteDirectory(resourcesDir);
                             } catch (IOException ignored) {
                             }
