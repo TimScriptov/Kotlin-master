@@ -49,5 +49,8 @@
 	<string name="offline">Оффлайн</string>
 	<string name="downloading">Загрузка...</string>
 	<string name="only_prem">Доступно только Premium пользователям!</string>
+    <string name="loading">Загрузка</string>
+	<string name="unpacking">Распаковка</string>
+	<string name="offline_activated">Оффлайн активирован</string>
 
 </resources>

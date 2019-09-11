@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 
+import com.mcal.kotlin.R;
 import com.mcal.kotlin.SettingsActivity;
 import com.mcal.kotlin.data.Preferences;
 
@@ -23,6 +24,8 @@ import java.net.URLConnection;
 import es.dmoral.toasty.Toasty;
 
 import static com.mcal.kotlin.data.Constants.DOWNLOAD_ZIP;
+import static com.mcal.kotlin.data.Constants.OFFLINE_ZIP;
+import static com.mcal.kotlin.data.Constants.RESOURCES;
 
 public class Offline extends AsyncTask<Void, Integer, Boolean> {
     private SettingsActivity settingsActivity;
@@ -44,7 +47,7 @@ public class Offline extends AsyncTask<Void, Integer, Boolean> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progressDialog.setTitle("Загрузка");
+        progressDialog.setTitle(settingsActivity.getString(R.string.loading));
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setCancelable(false);
         progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, settingsActivity.getString(android.R.string.cancel), new DialogInterface.OnClickListener() {
@@ -68,8 +71,8 @@ public class Offline extends AsyncTask<Void, Integer, Boolean> {
                 progressDialog.setMax(connection.getContentLength());
                 progressDialog.show();
 
-                File offline = new File(settingsActivity.getFilesDir(), "offline.zip");
-                File resourcesDir = new File(settingsActivity.getFilesDir(), "resources");
+                File offline = new File(settingsActivity.getFilesDir(), OFFLINE_ZIP);
+                File resourcesDir = new File(settingsActivity.getFilesDir(), RESOURCES);
 
                 InputStream inputStream = new BufferedInputStream(connection.getInputStream());
                 OutputStream outputStream = new FileOutputStream(offline);
@@ -106,7 +109,7 @@ public class Offline extends AsyncTask<Void, Integer, Boolean> {
         super.onProgressUpdate(values);
 
         if (values[0] == -1) {
-            progressDialog.setTitle("Распаковка");
+            progressDialog.setTitle(settingsActivity.getString(R.string.unpacking));
         } else progressDialog.setProgress(values[0]);
     }
 
@@ -117,7 +120,7 @@ public class Offline extends AsyncTask<Void, Integer, Boolean> {
         if (bool) {
             progressDialog.dismiss();
             Preferences.setOffline(true);
-            Toasty.success(settingsActivity, "Оффлайн активирован").show();
+            Toasty.success(settingsActivity, settingsActivity.getString(R.string.offline_activated)).show();
         }
     }
 }
