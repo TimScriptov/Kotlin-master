@@ -26,7 +26,7 @@ public final class Constants {
     public static final String ANTIPATCH3 = Utils.fromBase64("Y29tLmFueW15LnJlZmxlY3Rpb24="); // com.anymy.reflection
     public static final String ANTIPATCH4 = Utils.fromBase64("YmluLm10LmFwa3NpZ25hdHVyZWtpbGxlcnBsdXMuSG9va0FwcGxpY2F0aW9u"); // bin.mt.apksignaturekillerplus.HookApplication
     public static final String ANTIPATCH5 = Utils.fromBase64("Y2MuYmlubXQuc2lnbmF0dXJlLkhvb2s="); // cc.binmt.signature.Hook
-    public static final String META_INF = Utils.xor("えぃけぇ〨くか") + Utils.xor("ぃ〩"); // META-INF/
+    public static final String META_INF = Utils.xor("えぃけぇ〨くか぀"); // META-INF/
     public static final String RSA = Utils.xor("ござぇ"); // .RSA
     public static final String DSA = Utils.xor("あざぇ"); // .DSA
     public static final String SHA = Utils.xor("ざぎい"); // SHA
