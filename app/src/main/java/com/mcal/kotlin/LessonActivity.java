@@ -205,7 +205,7 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
 
             if (isOffline()) {
                 //if (isPremium) {
-                    if (SignatureUtils.verifySignatureSHA(getApplicationContext())) {
+                    if (SignatureUtils.verifySignatureSHA(getApplicationContext()) || BuildConfig.DEBUG) {
                         link = FILE + link;
                         webView.loadDataWithBaseURL(link, HtmlRenderer.renderHtml(FileReader.fromStorage(link.replace(FILE, ""))), TEXT_HTML, UTF_8, link);
                         cancel(true);
@@ -226,7 +226,7 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            if (SignatureUtils.verifySignatureSHA(getApplicationContext())) {
+            if (SignatureUtils.verifySignatureSHA(getApplicationContext()) || BuildConfig.DEBUG) {
                 link += "#googtrans(ru|" + Preferences.getLang() + ")";
                 webView.loadDataWithBaseURL(link, html, TEXT_HTML, UTF_8, link);
             } else {

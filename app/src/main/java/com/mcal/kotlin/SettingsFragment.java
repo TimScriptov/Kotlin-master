@@ -54,7 +54,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
         switch (key) {
             case "offline":
-                if (preferences.getBoolean(key, true) && isPremium && SignatureUtils.verifySignatureSHA(App.getContext())) {
+                if (preferences.getBoolean(key, true) && isPremium && SignatureUtils.verifySignatureSHA(App.getContext()) || BuildConfig.DEBUG) {
                     if (Utils.isNetworkAvailable()) {
                         final ProgressDialog progressDialog = new ProgressDialog(getContext());
                         progressDialog.setTitle(getString(R.string.downloading));
