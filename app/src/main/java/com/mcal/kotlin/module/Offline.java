@@ -39,7 +39,7 @@ public class Offline extends AsyncTask<Void, Integer, Boolean> {
 
     private void deleteResources() {
         try {
-            File resourcesDir = new File(settingsActivity.getPackageName(), "resources");
+            File resourcesDir = new File(settingsActivity.getPackageName(), RESOURCES);
             FileUtilsV2_2.deleteDirectory(resourcesDir);
         } catch (IOException e) {
         }

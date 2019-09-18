@@ -8,5 +8,4 @@ public final class ListMode {
     public enum Mode {
         DEFAULT, GRID
     }
-
 }

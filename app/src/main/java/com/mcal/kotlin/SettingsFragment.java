@@ -9,7 +9,6 @@ import android.os.Bundle;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreference;
 
-import com.mcal.kotlin.data.Constants;
 import com.mcal.kotlin.data.NightMode;
 import com.mcal.kotlin.module.Dialogs;
 import com.mcal.kotlin.module.Offline;
@@ -23,6 +22,8 @@ import java.io.IOException;
 
 import static android.app.Activity.RESULT_OK;
 import static com.mcal.kotlin.data.Constants.IS_PREMIUM;
+import static com.mcal.kotlin.data.Constants.OFFLINE;
+import static com.mcal.kotlin.data.Constants.RESOURCES;
 
 public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
     private boolean isPremium;
@@ -33,7 +34,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         setPreferencesFromResource(R.xml.settings, rootKey);
 
         isPremium = requireActivity().getIntent().getBooleanExtra(IS_PREMIUM, false);
-        offline = findPreference("offline");
+        offline = findPreference(OFFLINE);
 
     }
 
@@ -66,7 +67,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
                         @Override
                         public void run() {
                             try {
-                                File resourcesDir = new File(requireActivity().getFilesDir(), Constants.RESOURCES);
+                                File resourcesDir = new File(requireActivity().getFilesDir(), RESOURCES);
                                 FileUtils.deleteDirectory(resourcesDir);
                             } catch (IOException ignored) {
                             }

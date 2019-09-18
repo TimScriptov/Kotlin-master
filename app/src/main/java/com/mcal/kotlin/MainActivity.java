@@ -43,7 +43,9 @@ import es.dmoral.toasty.Toasty;
 import static com.anjlab.android.iab.v3.Constants.BILLING_RESPONSE_RESULT_USER_CANCELED;
 import static com.mcal.kotlin.data.Constants.IS_PREMIUM;
 import static com.mcal.kotlin.data.Constants.LK;
+import static com.mcal.kotlin.data.Constants.POSITION;
 import static com.mcal.kotlin.data.Constants.PREMIUM;
+import static com.mcal.kotlin.data.Constants.URL;
 import static com.mcal.kotlin.data.Preferences.isOffline;
 
 public class MainActivity extends BaseActivity implements MainView, SearchView.OnQueryTextListener, IBillingHandler, NavigationView.OnNavigationItemSelectedListener {
@@ -74,8 +76,8 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
             return;
         }
         startActivityForResult(new Intent(this, LessonActivity.class)
-                .putExtra("url", url)
-                .putExtra("position", position), REQUEST_CODE_IS_READ);
+                .putExtra(URL, url)
+                .putExtra(POSITION, position), REQUEST_CODE_IS_READ);
     }
 
     @Override
@@ -192,7 +194,7 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
         if (requestCode == REQUEST_CODE_IS_READ) {
 
             if (resultCode == RESULT_OK) {
-                int position = data.getIntExtra("position", 0);
+                int position = data.getIntExtra(POSITION, 0);
 
                 listAdapter.notifyItemChanged(position);
             }
@@ -206,7 +208,7 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
 
     private void resumeLesson() {
         startActivityForResult(new Intent(this, LessonActivity.class).
-                putExtra("url", Preferences.getBookmark()), REQUEST_CODE_IS_READ);
+                putExtra(URL, Preferences.getBookmark()), REQUEST_CODE_IS_READ);
     }
 
     @Override

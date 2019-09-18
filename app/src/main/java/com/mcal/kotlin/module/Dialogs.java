@@ -63,5 +63,4 @@ public class Dialogs {
                 .setCancelable(true)
                 .create().show();
     }
-
 }

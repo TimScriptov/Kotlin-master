@@ -41,7 +41,7 @@
     <string name="no_bookmarks">没有书签</string>
     <string name="navigation_drawer_open">打开侧边栏</string>
     <string name="navigation_drawer_close">关闭侧边栏</string>
-    <string name="version_nav_header">版本 11.5.0</string>
+    <string name="version_nav_header">版本 11.5.2</string>
     <string name="thanks">谢谢！</string>
     <string name="version_available">可用版本</string>
     <string name="ads_blocked">我们发现你在屏蔽广告！不买专业版你将不能使用这个应用程序。</string>
@@ -52,4 +52,5 @@
     <string name="loading">Loading</string>
     <string name="unpacking">Unpacking</string>
     <string name="offline_activated">Offline activated</string>
+    <string name="google_play_services_not_available">Google Play Services Not Available!</string>
 </resources>

@@ -40,5 +40,4 @@ public class ListParser {
     public ListAdapter getListAdapter() {
         return new ListAdapter(items, mainView);
     }
-
 }

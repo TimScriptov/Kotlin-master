@@ -110,6 +110,5 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
             items = filteredItems;
             notifyDataSetChanged();
         }
-
     }
 }

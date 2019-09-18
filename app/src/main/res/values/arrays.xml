@@ -3,14 +3,14 @@
 	
 	<string-array name="languages" formatted="false">
 		<item>Русский</item>
-		<item>English</item>
-		<item>Spanish</item>
-		<item>Arabic</item>
-		<item>Deutsch</item>
-		<item>Italian</item>
-		<item>Українська</item>
-		<item>French</item>
-		<item>Chinese</item>
+		<item>English(Google translate)</item>
+		<item>Spanish(Google translate)</item>
+		<item>Arabic(Google translate)</item>
+		<item>Deutsch(Google translate)</item>
+		<item>Italian(Google translate)</item>
+		<item>Українська(Google translate)</item>
+		<item>French(Google translate)</item>
+		<item>Chinese(Google translate)</item>
 	</string-array>
 	
 	<string-array name="language_values" formatted="false">

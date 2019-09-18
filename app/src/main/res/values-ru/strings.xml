@@ -41,7 +41,7 @@
     <string name="no_bookmarks">Закладок нет</string>
     <string name="navigation_drawer_open">Открыть drawer</string>
     <string name="navigation_drawer_close">Закрыть drawer</string>
-    <string name="version_nav_header">Версия 11.4.9</string>
+    <string name="version_nav_header">Версия 11.5.2</string>
 	<string name="thanks">Спасибо!</string>
 	<string name="version_available">Доступна версия</string>
     <string name="ads_blocked">Мы определили, что вы блокируете рекламу!  Вы не можете использовать это приложение без рекламы, если вы не купили Премиум!</string>
@@ -52,5 +52,6 @@
     <string name="loading">Загрузка</string>
 	<string name="unpacking">Распаковка</string>
 	<string name="offline_activated">Оффлайн активирован</string>
+	<string name="google_play_services_not_available">Сервисы Google Play недоступны!</string>
 
 </resources>

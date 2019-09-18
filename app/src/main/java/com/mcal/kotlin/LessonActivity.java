@@ -32,6 +32,12 @@ import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
 
 import java.util.concurrent.TimeUnit;
 
+import static com.mcal.kotlin.data.Constants.FILE;
+import static com.mcal.kotlin.data.Constants.IS_READ;
+import static com.mcal.kotlin.data.Constants.POSITION;
+import static com.mcal.kotlin.data.Constants.TEXT_HTML;
+import static com.mcal.kotlin.data.Constants.URL;
+import static com.mcal.kotlin.data.Constants.UTF_8;
 import static com.mcal.kotlin.data.Constants.getResPath;
 import static com.mcal.kotlin.data.Preferences.isOffline;
 import static com.mcal.kotlin.utils.LessonUtils.getLessonNumberByUrl;
@@ -44,7 +50,6 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
     private CollapsingToolbarLayout ctl;
     private int itemPosition;
 
-    //private SharedPreferences prefs;
     //private boolean isPremium;
 
     @Override
@@ -102,9 +107,9 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
         prev_lesson.setOnClickListener(this);
         next_lesson.setOnClickListener(this);
         bookmark.setOnClickListener(this);
-        itemPosition = getIntent().getIntExtra("position", 0);
+        itemPosition = getIntent().getIntExtra(POSITION, 0);
 
-        new PageLoader(getIntent().getStringExtra("url")).execute();
+        new PageLoader(getIntent().getStringExtra(URL)).execute();
 
         //isPremium = getIntent().getBooleanExtra(IS_PREMIUM, false);
     }
@@ -137,7 +142,7 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
     private void markAsRead(int num) {
         if (LessonUtils.markAsRead(num)) {
             Snackbar.make(webView, getString(R.string.marked_as_read, num), Snackbar.LENGTH_LONG).show();
-            setResult(RESULT_OK, new Intent().putExtra("isRead", true).putExtra("position", itemPosition));
+            setResult(RESULT_OK, new Intent().putExtra(IS_READ, true).putExtra(POSITION, itemPosition));
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -201,11 +206,11 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
             if (isOffline()) {
                 //if (isPremium) {
                     if (SignatureUtils.verifySignatureSHA(getApplicationContext())) {
-                        link = "file:///" + link;
-                        webView.loadDataWithBaseURL(link, HtmlRenderer.renderHtml(FileReader.fromStorage(link.replace("file:///", ""))), "text/html", "UTF-8", link);
+                        link = FILE + link;
+                        webView.loadDataWithBaseURL(link, HtmlRenderer.renderHtml(FileReader.fromStorage(link.replace(FILE, ""))), TEXT_HTML, UTF_8, link);
                         cancel(true);
                     } else {
-                        webView.loadData(html, "text/html", "UTF-8");
+                        webView.loadData(html, TEXT_HTML, UTF_8);
                     }
                 //}
             }
@@ -221,12 +226,12 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            //if (SignatureUtils.verifySignatureSHA(getApplicationContext())) {
+            if (SignatureUtils.verifySignatureSHA(getApplicationContext())) {
                 link += "#googtrans(ru|" + Preferences.getLang() + ")";
-                webView.loadDataWithBaseURL(link, html, "text/html", "UTF-8", link);
-            //} else {
-            //    webView.loadData(html, "text/html", "UTF-8");
-            //}
+                webView.loadDataWithBaseURL(link, html, TEXT_HTML, UTF_8, link);
+            } else {
+                webView.loadData(html, TEXT_HTML, UTF_8);
+            }
         }
     }
 }
