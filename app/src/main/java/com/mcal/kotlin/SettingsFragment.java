@@ -13,6 +13,7 @@ import com.mcal.kotlin.data.Constants;
 import com.mcal.kotlin.data.NightMode;
 import com.mcal.kotlin.module.Dialogs;
 import com.mcal.kotlin.module.Offline;
+import com.mcal.kotlin.utils.SignatureUtils;
 import com.mcal.kotlin.utils.Utils;
 
 import org.zeroturnaround.zip.commons.FileUtils;
@@ -52,7 +53,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
         switch (key) {
             case "offline":
-                if (preferences.getBoolean(key, true) && isPremium) {
+                if (preferences.getBoolean(key, true) && isPremium && SignatureUtils.verifySignatureSHA(App.getContext())) {
                     if (Utils.isNetworkAvailable()) {
                         final ProgressDialog progressDialog = new ProgressDialog(getContext());
                         progressDialog.setTitle(getString(R.string.downloading));

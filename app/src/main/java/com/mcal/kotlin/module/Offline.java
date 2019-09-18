@@ -6,10 +6,10 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 
 import com.mcal.kotlin.R;
-import com.mcal.kotlin.SettingsActivity;
 import com.mcal.kotlin.data.Preferences;
 
 import org.zeroturnaround.zip.ZipUtil;
+import org.zeroturnaround.zip.commons.FileUtilsV2_2;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -37,13 +37,13 @@ public class Offline extends AsyncTask<Void, Integer, Boolean> {
         progressDialog = new ProgressDialog(settingsActivity);
     }
 
-    /*private void deleteResources() {
+    private void deleteResources() {
         try {
             File resourcesDir = new File(settingsActivity.getPackageName(), "resources");
             FileUtilsV2_2.deleteDirectory(resourcesDir);
         } catch (IOException e) {
         }
-    }*/
+    }
 
     @Override
     protected void onPreExecute() {

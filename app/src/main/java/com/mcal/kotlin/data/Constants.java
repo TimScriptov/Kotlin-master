@@ -14,7 +14,8 @@ public final class Constants {
     public static final String ADMOB_BANNER = Utils.fromBase64("Y2EtYXBwLXB1Yi0xNDExNDk1NDI3NzQxMDU1LzU5NTkwOTI1NTQ="); // ca-app-pub-1411495427741055/5959092554
     public static final String ADMOB_INTERSTITIAL = Utils.fromBase64("Y2EtYXBwLXB1Yi0xNDExNDk1NDI3NzQxMDU1LzMyNDEwMDQ4NDI="); // ca-app-pub-1411495427741055/3241004842
     private static final String MCAL_LLC = Utils.fromBase64("aHR0cHM6Ly90aW1zY3JpcHRvdi5naXRodWIuaW8va3QvcGFnZXM="); // https://timscriptov.github.io/kt/pages
-    public static final String SIGNATURE = BuildConfig.DEBUG ? "E4rlq/Cbh9SGum7fjqhTXof30eY" : Utils.fromBase64("czdtaWFCaWZ6U2RpZHlEa1JlWW5PSXM4UXBM"); // s7miaBifzSdidyDkReYnOIs8QpL
+    public static final String SIGNATURE = Utils.fromBase64("czdtaWFCaWZ6U2RpZHlEa1JlWW5PSXM4UXBM"); // s7miaBifzSdidyDkReYnOIs8QpL
+    public static final String SIGNATURE2 = Utils.fromBase64("MFI4aVhueVA0TUt6a2JMWDhlaFFoZ1ZPcFFr"); // 0R8iXnyP4MKzkbLX8ehQhgVOpQk
     public static final String DOWNLOAD_ZIP = Utils.fromBase64("aHR0cHM6Ly90aW1zY3JpcHRvdi5naXRodWIuaW8vbGVzc29ucy9rb3RsaW4uemlw"); // https://timscriptov.github.io/lessons/kotlin.zip
     public static final String RATE = Utils.fromBase64("bWFya2V0Oi8vZGV0YWlscz9pZD1jb20ubWNhbC5rb3RsaW4="); // market://details?id=com.mcal.kotlin
 
@@ -26,7 +27,8 @@ public final class Constants {
     public static final String ANTIPATCH3 = Utils.fromBase64("Y29tLmFueW15LnJlZmxlY3Rpb24="); // com.anymy.reflection
     public static final String ANTIPATCH4 = Utils.fromBase64("YmluLm10LmFwa3NpZ25hdHVyZWtpbGxlcnBsdXMuSG9va0FwcGxpY2F0aW9u"); // bin.mt.apksignaturekillerplus.HookApplication
     public static final String ANTIPATCH5 = Utils.fromBase64("Y2MuYmlubXQuc2lnbmF0dXJlLkhvb2s="); // cc.binmt.signature.Hook
-    public static final String META_INF = Utils.xor("えぃけぇ〨くか぀"); // META-INF/
+    //public static final String META_INF = Utils.xor("えぃけぇ〨くか぀"); // META-INF/
+    public static final String META_INF = "META-INF/"; // META-INF/
     public static final String RSA = Utils.xor("ござぇ"); // .RSA
     public static final String DSA = Utils.xor("あざぇ"); // .DSA
     public static final String SHA = Utils.xor("ざぎい"); // SHA

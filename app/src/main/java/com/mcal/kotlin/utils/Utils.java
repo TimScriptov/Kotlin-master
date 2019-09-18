@@ -22,7 +22,7 @@ public class Utils {
 
     public static String xor(String a)
     {
-        char[] ax = new char[]{'\u3005', '\u3006'};
+        char[] ax = new char[]{'\u3005', '\u3006'};//々
         try
         {
             StringBuilder output = new StringBuilder();

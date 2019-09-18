@@ -19,12 +19,12 @@ import static com.mcal.kotlin.data.Constants.DSA;
 import static com.mcal.kotlin.data.Constants.META_INF;
 import static com.mcal.kotlin.data.Constants.RSA;
 import static com.mcal.kotlin.data.Constants.SHA;
-import static com.mcal.kotlin.data.Constants.SIGNATURE;
+import static com.mcal.kotlin.data.Constants.SIGNATURE2;
 
 public class SignatureUtils {
     // проверяет подпись приложения
     public static boolean verifySignatureSHA(Context c) {
-        return Utils.reverseString(directReadSignature(c)).endsWith(SIGNATURE);
+        return /*Utils.reverseString(directReadSignature(c)).endsWith(SIGNATURE) ||*/ Utils.reverseString(directReadSignature(c)).endsWith(SIGNATURE2);
     }
 
     // получает SHA1withRSA подпись приложения

@@ -32,7 +32,6 @@ import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.mcal.kotlin.data.Constants.IS_PREMIUM;
 import static com.mcal.kotlin.data.Constants.getResPath;
 import static com.mcal.kotlin.data.Preferences.isOffline;
 import static com.mcal.kotlin.utils.LessonUtils.getLessonNumberByUrl;
@@ -46,7 +45,7 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
     private int itemPosition;
 
     //private SharedPreferences prefs;
-    private boolean isPremium;
+    //private boolean isPremium;
 
     @Override
     public void onClick(View p1) {
@@ -107,7 +106,7 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
 
         new PageLoader(getIntent().getStringExtra("url")).execute();
 
-        isPremium = getIntent().getBooleanExtra(IS_PREMIUM, false);
+        //isPremium = getIntent().getBooleanExtra(IS_PREMIUM, false);
     }
 
     @Override
@@ -199,10 +198,16 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
             super.onPreExecute();
             progressBar.setVisibility(View.VISIBLE);
 
-            if (isOffline() & isPremium & SignatureUtils.verifySignatureSHA(App.getContext())) {
-                link = "file:///" + link;
-                webView.loadDataWithBaseURL(link, HtmlRenderer.renderHtml(FileReader.fromStorage(link.replace("file:///", ""))), "text/html", "UTF-8", link);
-                cancel(true);
+            if (isOffline()) {
+                //if (isPremium) {
+                    if (SignatureUtils.verifySignatureSHA(getApplicationContext())) {
+                        link = "file:///" + link;
+                        webView.loadDataWithBaseURL(link, HtmlRenderer.renderHtml(FileReader.fromStorage(link.replace("file:///", ""))), "text/html", "UTF-8", link);
+                        cancel(true);
+                    } else {
+                        webView.loadData(html, "text/html", "UTF-8");
+                    }
+                //}
             }
         }
 
@@ -216,12 +221,12 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            link += "#googtrans(ru|" + Preferences.getLang() + ")";
-
-            if (SignatureUtils.verifySignatureSHA(getApplicationContext()) || BuildConfig.DEBUG) {
+            //if (SignatureUtils.verifySignatureSHA(getApplicationContext())) {
+                link += "#googtrans(ru|" + Preferences.getLang() + ")";
                 webView.loadDataWithBaseURL(link, html, "text/html", "UTF-8", link);
-            } else webView.loadData(html, "text/html", "UTF-8");
+            //} else {
+            //    webView.loadData(html, "text/html", "UTF-8");
+            //}
         }
-
     }
 }
