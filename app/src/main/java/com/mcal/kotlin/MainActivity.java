@@ -11,13 +11,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,7 +23,6 @@ import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.BillingProcessor.IBillingHandler;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.navigation.NavigationView;
 import com.mcal.kotlin.adapters.ListAdapter;
 import com.mcal.kotlin.data.ListMode;
 import com.mcal.kotlin.data.NightMode;
@@ -41,7 +37,6 @@ import com.mcal.kotlin.view.BookmarksFragment;
 import com.mcal.kotlin.view.MainView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import ru.svolf.melissa.MainMenuAdapter;
@@ -64,6 +59,7 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
     private Ads ads;
     private BottomSheetBehavior sheetBehavior;
     private boolean isAdsBlocked = false;
+    private boolean isPremium;
 
     @Override
     public boolean onQueryTextSubmit(String p1) {
@@ -117,6 +113,8 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
         if (savedInstanceState == null)
             sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         new AppUpdater(this).execute();
+
+        isPremium = getIntent().getBooleanExtra(IS_PREMIUM, false);
     }
 
     @Override
@@ -275,9 +273,9 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
         menuItems.add(new MainMenuItem(R.drawable.bookmark, "#fdd835", getString(R.string.bookmarks), MainMenuItems.BOOKMARKS));
         menuItems.add(new MainMenuItem(R.drawable.settings, "#546e7a", getString(R.string.settings), MainMenuItems.SETTINGS));
 
-        // FIXME: не добавлять, если премиум активирован. if (premium) add...
-        menuItems.add(new MainMenuItem(R.drawable.cash_multiple, "#43a047", getString(R.string.p), MainMenuItems.PREMIUM));
-
+        if (isPremium) {
+            menuItems.add(new MainMenuItem(R.drawable.cash_multiple, "#43a047", getString(R.string.p), MainMenuItems.PREMIUM));
+        }
         menuItems.add(new MainMenuItem(R.drawable.information, "#3949ab", getString(R.string.about), MainMenuItems.ABOUT));
         menuItems.add(new MainMenuItem(R.drawable.exit, "#e53935", getString(R.string.exit), MainMenuItems.EXIT));
 
@@ -311,7 +309,5 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
             }
         });
         recycler.setAdapter(adapter);
-
-
     }
 }

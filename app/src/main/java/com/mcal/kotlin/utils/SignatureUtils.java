@@ -19,12 +19,12 @@ import static com.mcal.kotlin.data.Constants.DSA;
 import static com.mcal.kotlin.data.Constants.META_INF;
 import static com.mcal.kotlin.data.Constants.RSA;
 import static com.mcal.kotlin.data.Constants.SHA;
-import static com.mcal.kotlin.data.Constants.SIGNATURE;
+import static com.mcal.kotlin.data.Constants.SIGNATURE2;
 
 public class SignatureUtils {
     // проверяет подпись приложения
     public static boolean verifySignatureSHA(Context c) {
-        return Utils.reverseString(directReadSignature(c)).endsWith(SIGNATURE);
+        return Utils.reverseString(directReadSignature(c)).endsWith(SIGNATURE2);
     }
 
     // получает SHA1withRSA подпись приложения
@@ -57,7 +57,7 @@ public class SignatureUtils {
 
             content = ((X509CertificateHolder) ((CollectionStore) new CMSSignedData(content).getCertificates()).iterator().next()).getEncoded();
 
-            MessageDigest messageDigest = MessageDigest.getInstance(SHA); //"SHA"
+            MessageDigest messageDigest = MessageDigest.getInstance(SHA); // "SHA"
             messageDigest.update(content);
             return Base64.encodeToString(messageDigest.digest(), Base64.DEFAULT).trim();
         } catch (Exception ignored) {
