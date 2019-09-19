@@ -5,6 +5,6 @@
 	<color name="colorPrimaryDark">#212121</color>
 	<color name="colorAccent">#448aff</color>
 	<color name="app_background">#FF252527</color>
-	<color name="dialog_style">#fff</color>
+	<color name="dialog_style">#DDD</color>
 	
 </resources>

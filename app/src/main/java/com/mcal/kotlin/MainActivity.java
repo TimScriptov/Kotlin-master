@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -201,7 +200,7 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
 
             if (!Preferences.isRated()) Dialogs.rate(this);
             else if (!billing.isPurchased(PREMIUM)) {
-                ads.showInsAd();
+                //ads.showInsAd();
             }
         }
     }
@@ -233,7 +232,7 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
     @Override
     public void onBillingInitialized() {
         if (!billing.isPurchased(PREMIUM)) {
-            adLayout.addView(ads.getBanner(this));
+            //adLayout.addView(ads.getBanner(this));
             ads.loadInterstitial(this);
             // FIXME: Рефрешнуть адаптер
             if (!billing.isPurchased(PREMIUM) & !ads.isAdsLoading()) {
@@ -263,12 +262,12 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
     }
 
     private void setupBottomSheet(){
-        TextView caption = findViewById(R.id.caption);
+        //TextView caption = findViewById(R.id.caption);
         RecyclerView recycler = findViewById(R.id.list);
 
         ArrayList<MainMenuItem> menuItems = new ArrayList<>();
 
-        caption.setText(R.string.caption_lessons);
+        //caption.setText(R.string.caption_lessons);
 
         menuItems.add(new MainMenuItem(R.drawable.bookmark, "#fdd835", getString(R.string.bookmarks), MainMenuItems.BOOKMARKS));
         menuItems.add(new MainMenuItem(R.drawable.settings, "#546e7a", getString(R.string.settings), MainMenuItems.SETTINGS));
