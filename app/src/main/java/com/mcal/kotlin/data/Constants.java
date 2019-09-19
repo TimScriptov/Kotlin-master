@@ -16,7 +16,7 @@ public final class Constants {
     public static final String SIGNATURE2 = Utils.fromBase64("MFI4aVhueVA0TUt6a2JMWDhlaFFoZ1ZPcFFr"); // 0R8iXnyP4MKzkbLX8ehQhgVOpQk
     public static final String DOWNLOAD_ZIP = Utils.fromBase64("aHR0cHM6Ly90aW1zY3JpcHRvdi5naXRodWIuaW8vbGVzc29ucy9rb3RsaW4uemlw"); // https://timscriptov.github.io/lessons/kotlin.zip
     public static final String RATE = Utils.fromBase64("bWFya2V0Oi8vZGV0YWlscz9pZD1jb20ubWNhbC5rb3RsaW4="); // market://details?id=com.mcal.kotlin
-    public static final String UTF_8 = Utils.xor("ぐげぃ〫〽️"); // UTF-8
+    public static final String UTF_8 = Utils.xor("ぐげぃ〫〽"); // UTF-8
     public static final String POSITION = Utils.xor("ふどぶはぱはなと"); // position
     public static final String URL = Utils.xor("ばぴど"); // url
     public static final String IS_READ = Utils.xor("ぬふしっつぢ"); // isRead
