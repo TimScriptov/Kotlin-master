@@ -53,5 +53,6 @@
 	<string name="unpacking">Распаковка</string>
 	<string name="offline_activated">Оффлайн активирован</string>
 	<string name="google_play_services_not_available">Сервисы Google Play недоступны!</string>
+    <string name="caption_lessons">Lessons</string>
 
 </resources>

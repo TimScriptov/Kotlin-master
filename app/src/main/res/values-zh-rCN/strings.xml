@@ -53,4 +53,5 @@
     <string name="unpacking">Unpacking</string>
     <string name="offline_activated">Offline activated</string>
     <string name="google_play_services_not_available">Google Play Services Not Available!</string>
+    <string name="caption_lessons">Lessons</string>
 </resources>

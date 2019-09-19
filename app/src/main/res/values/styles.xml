@@ -7,6 +7,7 @@
 		<item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowAnimationStyle">@style/TransitionStyle</item>
 		<item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+		<item name="dialog_style">@color/dialog_style</item>
 	</style>
 
 	<style name="toolbar" parent="Theme.AppCompat.DayNight.DarkActionBar">

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.BillingProcessor.IBillingHandler;
 import com.anjlab.android.iab.v3.TransactionDetails;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.navigation.NavigationView;
 import com.mcal.kotlin.adapters.ListAdapter;
 import com.mcal.kotlin.data.ListMode;
@@ -38,7 +40,13 @@ import com.mcal.kotlin.utils.Utils;
 import com.mcal.kotlin.view.BookmarksFragment;
 import com.mcal.kotlin.view.MainView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import es.dmoral.toasty.Toasty;
+import ru.svolf.melissa.MainMenuAdapter;
+import ru.svolf.melissa.MainMenuItem;
+import ru.svolf.melissa.MainMenuItems;
 
 import static com.anjlab.android.iab.v3.Constants.BILLING_RESPONSE_RESULT_USER_CANCELED;
 import static com.mcal.kotlin.data.Constants.IS_PREMIUM;
@@ -48,14 +56,13 @@ import static com.mcal.kotlin.data.Constants.PREMIUM;
 import static com.mcal.kotlin.data.Constants.URL;
 import static com.mcal.kotlin.data.Preferences.isOffline;
 
-public class MainActivity extends BaseActivity implements MainView, SearchView.OnQueryTextListener, IBillingHandler, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements MainView, SearchView.OnQueryTextListener, IBillingHandler {
 
     private LinearLayout adLayout;
     private BillingProcessor billing;
     private ListAdapter listAdapter;
     private Ads ads;
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
+    private BottomSheetBehavior sheetBehavior;
     private boolean isAdsBlocked = false;
 
     @Override
@@ -88,20 +95,9 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
+        sheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bottomView));
         adLayout = findViewById(R.id.adLayout);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this,
-                drawerLayout,
-                toolbar,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close);
-
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
         RecyclerView lessons = (RecyclerView) getLayoutInflater().inflate(R.layout.recycler_view, null);
 
         if (ListMode.getCurrentMode().equals(ListMode.Mode.GRID)) {
@@ -114,10 +110,12 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
             ((LinearLayout) findViewById(R.id.listContainer)).addView(lessons);
         }
 
+        setupBottomSheet();
+
         ads = new Ads();
         billing = new BillingProcessor(this, LK, this);
         if (savedInstanceState == null)
-            drawerLayout.openDrawer(GravityCompat.START);
+            sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         new AppUpdater(this).execute();
     }
 
@@ -180,10 +178,14 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
 
     @Override
     public void onBackPressed() {
-        if (time + 2000 > System.currentTimeMillis()) super.onBackPressed();
-        else {
-            Toasty.info(this, getString(R.string.press_back_once_more)).show();
-            time = System.currentTimeMillis();
+        if (sheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED){
+            sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        } else {
+            if (time + 2000 > System.currentTimeMillis()) super.onBackPressed();
+            else {
+                Toasty.info(this, getString(R.string.press_back_once_more)).show();
+                time = System.currentTimeMillis();
+            }
         }
     }
 
@@ -214,7 +216,7 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
     @Override
     public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
         Toasty.success(this, getString(R.string.p_a)).show();// premium_activated
-        navigationView.getMenu().findItem(R.id.b_p).setVisible(false);
+        // FIXME: Рефрешнуть адаптер
     }
 
     @Override
@@ -235,34 +237,12 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
         if (!billing.isPurchased(PREMIUM)) {
             adLayout.addView(ads.getBanner(this));
             ads.loadInterstitial(this);
-            navigationView.getMenu().findItem(R.id.b_p).setVisible(true);//buy_premium
+            // FIXME: Рефрешнуть адаптер
             if (!billing.isPurchased(PREMIUM) & !ads.isAdsLoading()) {
                 isAdsBlocked = true;
                 adsBlocked();
             }
         }
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case R.id.bookmarks:
-                new BookmarksFragment().show(getSupportFragmentManager(), null);
-                break;
-            case R.id.about:
-                startActivity(new Intent(this, AboutActivity.class));
-                break;
-            case R.id.settings:
-                startActivityForResult(new Intent(this, SettingsActivity.class).putExtra(IS_PREMIUM, billing.isPurchased(PREMIUM)), REQUEST_CODE_SETTINGS);
-                break;
-            case R.id.exit:
-                finish();
-                break;
-            case R.id.b_p://buy_premium
-                billing.purchase(this, PREMIUM);
-        }
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     public void adsBlocked() {
@@ -282,5 +262,56 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
                 })
                 .setCancelable(false)
                 .create().show();
+    }
+
+    private void setupBottomSheet(){
+        TextView caption = findViewById(R.id.caption);
+        RecyclerView recycler = findViewById(R.id.list);
+
+        ArrayList<MainMenuItem> menuItems = new ArrayList<>();
+
+        caption.setText(R.string.caption_lessons);
+
+        menuItems.add(new MainMenuItem(R.drawable.bookmark, "#fdd835", getString(R.string.bookmarks), MainMenuItems.BOOKMARKS));
+        menuItems.add(new MainMenuItem(R.drawable.settings, "#546e7a", getString(R.string.settings), MainMenuItems.SETTINGS));
+
+        // FIXME: не добавлять, если премиум активирован. if (premium) add...
+        menuItems.add(new MainMenuItem(R.drawable.cash_multiple, "#43a047", getString(R.string.p), MainMenuItems.PREMIUM));
+
+        menuItems.add(new MainMenuItem(R.drawable.information, "#3949ab", getString(R.string.about), MainMenuItems.ABOUT));
+        menuItems.add(new MainMenuItem(R.drawable.exit, "#e53935", getString(R.string.exit), MainMenuItems.EXIT));
+
+        MainMenuAdapter adapter = new MainMenuAdapter(menuItems);
+        adapter.setItemClickListener(new MainMenuAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(MainMenuItem menuItem, int position) {
+                switch (menuItem.getAction()) {
+                    case MainMenuItems.BOOKMARKS: {
+                        new BookmarksFragment().show(getSupportFragmentManager(), null);
+                        break;
+                    }
+                    case MainMenuItems.ABOUT: {
+                        startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                        break;
+                    }
+                    case MainMenuItems.SETTINGS: {
+                        startActivityForResult(new Intent(MainActivity.this, SettingsActivity.class).putExtra(IS_PREMIUM, billing.isPurchased(PREMIUM)), REQUEST_CODE_SETTINGS);
+                        break;
+                    }
+                    case MainMenuItems.EXIT: {
+                        finish();
+                        break;
+                    }
+                    case MainMenuItems.PREMIUM: {
+                        billing.purchase(MainActivity.this, PREMIUM);
+                        break;
+                    }
+                }
+                sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+        });
+        recycler.setAdapter(adapter);
+
+
     }
 }
