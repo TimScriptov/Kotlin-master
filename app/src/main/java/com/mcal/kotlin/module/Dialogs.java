@@ -15,6 +15,8 @@ import com.mcal.kotlin.R;
 import com.mcal.kotlin.data.Constants;
 import com.mcal.kotlin.data.Preferences;
 
+import ru.svolf.melissa.sheet.SweetViewDialog;
+
 import static com.mcal.kotlin.data.Constants.RATE;
 
 public class Dialogs {
@@ -38,11 +40,12 @@ public class Dialogs {
         View v = LayoutInflater.from(context).inflate(R.layout.rate, null);
         final RatingBar ratingBar = v.findViewById(R.id.rating_bar);
 
-        new AlertDialog.Builder(context)
-                .setView(v)
-                .setPositiveButton(R.string.rate, new DialogInterface.OnClickListener() {
+        SweetViewDialog dialog = new SweetViewDialog(context);
+                dialog.setTitle(R.string.rate);
+                dialog.setView(v);
+                dialog.setPositive(R.string.rate, new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface p1, int p2) {
+                    public void onClick(View v) {
                         if (ratingBar.getRating() > 3) {
                             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(RATE)));
                             Preferences.setRated();
@@ -51,9 +54,8 @@ public class Dialogs {
                             App.preferences.edit().putBoolean(Constants.IS_RATED, true).apply();
                         }
                     }
-                })
-                .create()
-                .show();
+                });
+                dialog.show();
     }
 
     public static void error(Context c, String text) {

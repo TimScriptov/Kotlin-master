@@ -10,13 +10,16 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.mcal.kotlin.R;
 import com.mcal.kotlin.adapters.BookmarksAdapter;
 import com.mcal.kotlin.data.Bookmarks;
 
 import java.util.ArrayList;
 
-public class BookmarksFragment extends DialogFragment {
+import ru.svolf.melissa.sheet.SweetViewDialog;
+
+public class BookmarksFragment extends BottomSheetDialogFragment {
     ArrayList<String> items = new ArrayList<>();
 
     @Override
@@ -42,10 +45,16 @@ public class BookmarksFragment extends DialogFragment {
             rcview.setVisibility(View.VISIBLE);
         } else view.findViewById(R.id.no_bookmarks).setVisibility(View.VISIBLE);
 
-        return new AlertDialog.Builder(getActivity())
-                .setView(view)
-                .setPositiveButton(R.string.close, null)
-                .create();
+        final SweetViewDialog dialog = new SweetViewDialog(getContext());
+        dialog.setTitle(getString(R.string.bookmarks));
+        dialog.setView(view);
+        dialog.setPositive(android.R.string.cancel, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        return dialog;
     }
 
 }
