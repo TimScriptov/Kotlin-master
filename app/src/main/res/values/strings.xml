@@ -54,5 +54,7 @@
 	<string name="offline_activated">Offline activated</string>
     <string name="google_play_services_not_available">Google Play Services Not Available!</string>
     <string name="caption_lessons">Lessons</string>
+    <string name="pref_sys_lang">App language</string>
+	<string name="lang_changed">App language has been changed. Please restart the application</string>
 
 </resources>

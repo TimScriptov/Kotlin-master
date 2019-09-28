@@ -12,8 +12,34 @@
 		<item>French(Google translate)</item>
 		<item>Chinese(Google translate)</item>
 	</string-array>
+
+	<string-array name="languages_main" formatted="false">
+		<item>Default</item>
+		<item>Русский</item>
+		<item>English</item>
+		<item>Spanish</item>
+		<item>Arabic</item>
+		<item>Deutsch</item>
+		<item>Italian</item>
+		<item>Українська</item>
+		<item>French</item>
+		<item>Chinese</item>
+	</string-array>
 	
 	<string-array name="language_values" formatted="false">
+		<item>ru</item>
+		<item>en</item>
+		<item>es</item>
+		<item>ar</item>
+		<item>de</item>
+		<item>it</item>
+		<item>uk</item>
+		<item>fr</item>
+		<item>zh-CN</item>
+	</string-array>
+
+	<string-array name="language_values_main" formatted="false">
+		<item>default</item>
 		<item>ru</item>
 		<item>en</item>
 		<item>es</item>
