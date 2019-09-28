@@ -3,9 +3,12 @@ package com.mcal.kotlin;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -41,10 +44,12 @@ import es.dmoral.toasty.Toasty;
 import ru.svolf.melissa.MainMenuAdapter;
 import ru.svolf.melissa.MainMenuItem;
 import ru.svolf.melissa.MainMenuItems;
+import ru.svolf.melissa.sheet.SweetContentDialog;
 
 import static com.anjlab.android.iab.v3.Constants.BILLING_RESPONSE_RESULT_USER_CANCELED;
 import static com.mcal.kotlin.data.Constants.IS_PREMIUM;
 import static com.mcal.kotlin.data.Constants.LK;
+import static com.mcal.kotlin.data.Constants.MORE_APPS;
 import static com.mcal.kotlin.data.Constants.POSITION;
 import static com.mcal.kotlin.data.Constants.PREMIUM;
 import static com.mcal.kotlin.data.Constants.URL;
@@ -288,7 +293,7 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
                         break;
                     }
                     case MainMenuItems.ABOUT: {
-                        startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                        showAboutSheet();
                         break;
                     }
                     case MainMenuItems.SETTINGS: {
@@ -308,5 +313,25 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
             }
         });
         recycler.setAdapter(adapter);
+    }
+
+    private void showAboutSheet(){
+        SweetContentDialog dialog = new SweetContentDialog(this);
+        dialog.setTitle(getString(R.string.app_name) + " v." + BuildConfig.VERSION_NAME);
+        dialog.setMessage(R.string.copyright);
+        dialog.setPositive(R.drawable.star, getString(R.string.rate), new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialogs.rate(MainActivity.this);
+            }
+        });
+        dialog.setNegative(R.drawable.google_play, getString(R.string.more_apps), new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(MORE_APPS)));
+            }
+        });
+        dialog.show();
+
     }
 }
