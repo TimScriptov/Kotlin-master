@@ -20,13 +20,14 @@ import ru.svolf.melissa.sheet.SweetViewDialog;
 import static com.mcal.kotlin.data.Constants.RATE;
 
 public class Dialogs {
-    public static void noConnectionError(Context c) {
-        new AlertDialog.Builder(c)
-                .setTitle(R.string.error)
-                .setMessage(R.string.no_connection)
-                .setPositiveButton(android.R.string.ok, null)
-                .setCancelable(false)
-                .create().show();
+    public static void noConnectionError(final Context context) {
+        View v = LayoutInflater.from(context).inflate(R.layout.no_connection_error, null);
+
+        final SweetViewDialog dialog = new SweetViewDialog(context);
+        dialog.setTitle(R.string.error);
+        dialog.setView(v);
+        dialog.setPositive(android.R.string.ok, null);
+        dialog.show();
     }
 
     public static void show(Context c, String text) {
