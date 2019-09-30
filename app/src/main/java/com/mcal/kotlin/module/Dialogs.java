@@ -1,7 +1,6 @@
 package com.mcal.kotlin.module;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;

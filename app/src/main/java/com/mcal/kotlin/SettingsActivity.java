@@ -2,8 +2,6 @@ package com.mcal.kotlin;
 
 import android.os.Bundle;
 
-import androidx.appcompat.widget.Toolbar;
-
 import com.mcal.kotlin.model.BaseActivity;
 
 public class SettingsActivity extends BaseActivity {

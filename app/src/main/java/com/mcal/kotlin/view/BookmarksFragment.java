@@ -1,12 +1,10 @@
 package com.mcal.kotlin.view;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 

@@ -11,8 +11,6 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import androidx.appcompat.widget.Toolbar;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.mcal.kotlin.data.Bookmarks;
@@ -93,7 +91,7 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson);
 
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        setSupportActionBar(findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ctl = findViewById(R.id.collapsing_toolbar);
         webView = findViewById(R.id.webView);
@@ -143,14 +141,11 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
         if (LessonUtils.markAsRead(num)) {
             Snackbar.make(webView, getString(R.string.marked_as_read, num), Snackbar.LENGTH_LONG).show();
             setResult(RESULT_OK, new Intent().putExtra(IS_READ, true).putExtra(POSITION, itemPosition));
-            AsyncTask.execute(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        TimeUnit.SECONDS.sleep(2);
-                        finish();
-                    } catch (InterruptedException ignored) {
-                    }
+            AsyncTask.execute(() -> {
+                try {
+                    TimeUnit.SECONDS.sleep(2);
+                    finish();
+                } catch (InterruptedException ignored) {
                 }
             });
         }
