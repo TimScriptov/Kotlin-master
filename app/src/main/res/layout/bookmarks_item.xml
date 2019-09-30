@@ -27,7 +27,8 @@
                 android:layout_height="match_parent"
                 android:id="@+id/remove_bookmark"
                 app:srcCompat="@drawable/trash_can_outline"
-                tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription"
+                style="@style/Widget.AppCompat.Button.Colored"/>
 
         </LinearLayout>
 
@@ -37,8 +38,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 card_view:cardCornerRadius="4dp"
+                app:strokeColor="#AFAFAF"
+                app:strokeWidth="0.5dp"
+                app:cardElevation="0dp"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
                 android:layout_marginTop="2dp"
@@ -76,7 +80,7 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 

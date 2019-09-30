@@ -18,6 +18,7 @@ public class SweetViewDialog extends BottomSheetDialog {
     private FrameLayout mContentFrame;
     private TextView mCaption;
     private Button mPositive, mNegative;
+    private View.OnClickListener positiveSet = null, negativeSet = null;
 
     public SweetViewDialog(@NonNull Context context) {
         super(context);
@@ -48,21 +49,25 @@ public class SweetViewDialog extends BottomSheetDialog {
     public void setPositive(CharSequence text, View.OnClickListener listener) {
         mPositive.setText(text);
         mPositive.setOnClickListener(listener);
+        positiveSet = listener;
     }
 
     public void setNegative(CharSequence text, View.OnClickListener listener) {
         mNegative.setText(text);
         mNegative.setOnClickListener(listener);
+        negativeSet = listener;
     }
 
     public void setPositive(int resId, View.OnClickListener listener) {
         mPositive.setText(resId);
         mPositive.setOnClickListener(listener);
+        positiveSet = listener;
     }
 
     public void setNegative(int resId, View.OnClickListener listener) {
         mNegative.setText(resId);
         mNegative.setOnClickListener(listener);
+        negativeSet = listener;
     }
 
     @Override
@@ -70,5 +75,21 @@ public class SweetViewDialog extends BottomSheetDialog {
         super.show();
         mNegative.setVisibility(mNegative.getText().toString().isEmpty() ? View.GONE : View.VISIBLE);
         mPositive.setVisibility(mPositive.getText().toString().isEmpty() ? View.GONE : View.VISIBLE);
+        if (mPositive.getVisibility() == View.VISIBLE && positiveSet == null) {
+            mPositive.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dismiss();
+                }
+            });
+        }
+        if (mNegative.getVisibility() == View.VISIBLE && negativeSet == null) {
+            mNegative.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dismiss();
+                }
+            });
+        }
     }
 }

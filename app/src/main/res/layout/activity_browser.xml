@@ -19,7 +19,8 @@
 			android:layout_height="0dp"
 			android:id="@+id/listContainer"
 			android:layout_weight="1.0"
-			android:orientation="vertical" />
+			android:orientation="vertical"
+			android:layout_marginBottom="@dimen/menu_sheet_height"/>
 		
 		<LinearLayout
 			android:layout_height="wrap_content"

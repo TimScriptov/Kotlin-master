@@ -64,6 +64,7 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
     private BottomSheetBehavior sheetBehavior;
     private boolean isAdsBlocked = false;
     private boolean isPremium;
+    private SearchView sv;
 
     @Override
     public boolean onQueryTextSubmit(String p1) {
@@ -92,11 +93,9 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         sheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bottomView));
         adLayout = findViewById(R.id.adLayout);
+        sv = findViewById(R.id.search_bar);
 
         RecyclerView lessons = (RecyclerView) getLayoutInflater().inflate(R.layout.recycler_view, null);
 
@@ -110,6 +109,7 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
             ((LinearLayout) findViewById(R.id.listContainer)).addView(lessons);
         }
 
+        setupSearchView();
         setupBottomSheet();
 
         ads = new Ads();
@@ -119,63 +119,6 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
         new AppUpdater(this).execute();
 
         isPremium = getIntent().getBooleanExtra(IS_PREMIUM, false);
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.continue_lesson).setVisible(Preferences.getBookmark() != null);
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @SuppressLint("RestrictedApi")
-    @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        SearchView sv = (SearchView) menu.findItem(R.id.search).getActionView();
-        sv.setOnQueryTextListener(this);
-        ((MenuBuilder) menu).setOptionalIconsVisible(true);
-
-        if (NightMode.getCurrentMode() == NightMode.Mode.DAY)
-            menu.findItem(R.id.day_night).setIcon(R.drawable.ic_night);
-
-        menu.findItem(R.id.search).setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
-            @Override
-            public boolean onMenuItemActionExpand(MenuItem item) {
-                menu.findItem(R.id.continue_lesson).setVisible(false);
-                menu.findItem(R.id.day_night).setVisible(false);
-                return true;
-            }
-
-            @Override
-            public boolean onMenuItemActionCollapse(MenuItem item) {
-                menu.findItem(R.id.continue_lesson).setVisible(true);
-                menu.findItem(R.id.day_night).setVisible(true);
-                return true;
-            }
-        });
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.day_night:
-                if (NightMode.getCurrentMode() == NightMode.Mode.DAY) {
-                    NightMode.setMode(NightMode.Mode.NIGHT);
-                    Preferences.setNightMode(true);
-                } else {
-                    NightMode.setMode(NightMode.Mode.DAY);
-                    Preferences.setNightMode(false);
-                }
-                getDelegate().applyDayNight();
-                break;
-            case R.id.continue_lesson:
-                if (isOffline() || Utils.isNetworkAvailable())
-                    resumeLesson();
-                else Dialogs.noConnectionError(this);
-        }
-        return true;
     }
 
     @Override
@@ -219,6 +162,7 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
     public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
         Toasty.success(this, getString(R.string.p_a)).show();// premium_activated
         // FIXME: Рефрешнуть адаптер
+        setupBottomSheet();
     }
 
     @Override
@@ -240,6 +184,7 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
             //adLayout.addView(ads.getBanner(this));
             ads.loadInterstitial(this);
             // FIXME: Рефрешнуть адаптер
+            setupBottomSheet();
             if (!billing.isPurchased(PREMIUM) & !ads.isAdsLoading()) {
                 isAdsBlocked = true;
                 adsBlocked();
@@ -250,18 +195,8 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
     public void adsBlocked() {
         new AlertDialog.Builder(this)
                 .setMessage(R.string.ads_blocked)
-                .setPositiveButton(R.string.buy, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        billing.purchase(MainActivity.this, PREMIUM);
-                    }
-                })
-                .setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        System.exit(0);
-                    }
-                })
+                .setPositiveButton(R.string.buy, (dialog, which) -> billing.purchase(MainActivity.this, PREMIUM))
+                .setNegativeButton(R.string.close, (dialog, which) -> System.exit(0))
                 .setCancelable(false)
                 .create().show();
     }
@@ -269,11 +204,16 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
     private void setupBottomSheet(){
         //TextView caption = findViewById(R.id.caption);
         RecyclerView recycler = findViewById(R.id.list);
+        if (recycler.getAdapter() != null){
+            recycler.setAdapter(null);
+        }
 
         ArrayList<MainMenuItem> menuItems = new ArrayList<>();
 
         //caption.setText(R.string.caption_lessons);
-
+        if (Preferences.getBookmark() != null) {
+            menuItems.add(new MainMenuItem(R.drawable.bookmark, "#fad805", getString(R.string.continue_lesson), MainMenuItems.CONTINUE));
+        }
         menuItems.add(new MainMenuItem(R.drawable.bookmark, "#fdd835", getString(R.string.bookmarks), MainMenuItems.BOOKMARKS));
         menuItems.add(new MainMenuItem(R.drawable.settings, "#546e7a", getString(R.string.settings), MainMenuItems.SETTINGS));
 
@@ -284,53 +224,61 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
         menuItems.add(new MainMenuItem(R.drawable.exit, "#e53935", getString(R.string.exit), MainMenuItems.EXIT));
 
         MainMenuAdapter adapter = new MainMenuAdapter(menuItems);
-        adapter.setItemClickListener(new MainMenuAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(MainMenuItem menuItem, int position) {
-                switch (menuItem.getAction()) {
-                    case MainMenuItems.BOOKMARKS: {
-                        new BookmarksFragment().show(getSupportFragmentManager(), null);
-                        break;
-                    }
-                    case MainMenuItems.ABOUT: {
-                        showAboutSheet();
-                        break;
-                    }
-                    case MainMenuItems.SETTINGS: {
-                        startActivityForResult(new Intent(MainActivity.this, SettingsActivity.class).putExtra(IS_PREMIUM, billing.isPurchased(PREMIUM)), REQUEST_CODE_SETTINGS);
-                        break;
-                    }
-                    case MainMenuItems.EXIT: {
-                        finish();
-                        break;
-                    }
-                    case MainMenuItems.PREMIUM: {
-                        billing.purchase(MainActivity.this, PREMIUM);
-                        break;
-                    }
+        adapter.setItemClickListener((menuItem, position) -> {
+            switch (menuItem.getAction()) {
+                case MainMenuItems.BOOKMARKS: {
+                    new BookmarksFragment().show(getSupportFragmentManager(), null);
+                    break;
                 }
-                sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                case MainMenuItems.ABOUT: {
+                    showAboutSheet();
+                    break;
+                }
+                case MainMenuItems.SETTINGS: {
+                    startActivityForResult(new Intent(MainActivity.this, SettingsActivity.class).putExtra(IS_PREMIUM, billing.isPurchased(PREMIUM)), REQUEST_CODE_SETTINGS);
+                    break;
+                }
+                case MainMenuItems.EXIT: {
+                    finish();
+                    break;
+                }
+                case MainMenuItems.PREMIUM: {
+                    billing.purchase(MainActivity.this, PREMIUM);
+                    break;
+                }
+                case MainMenuItems.CONTINUE: {
+                    if (isOffline() || Utils.isNetworkAvailable())
+                        resumeLesson();
+                    else Dialogs.noConnectionError(this);
+                    break;
+                }
             }
+            sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         });
         recycler.setAdapter(adapter);
+    }
+
+    private void setupSearchView() {
+        sv.setOnQueryTextListener(this);
+
+        findViewById(R.id.button_night).setOnClickListener(view -> {
+            if (NightMode.getCurrentMode() == NightMode.Mode.DAY) {
+                NightMode.setMode(NightMode.Mode.NIGHT);
+                Preferences.setNightMode(true);
+            } else {
+                NightMode.setMode(NightMode.Mode.DAY);
+                Preferences.setNightMode(false);
+            }
+            getDelegate().applyDayNight();
+        });
     }
 
     private void showAboutSheet(){
         SweetContentDialog dialog = new SweetContentDialog(this);
         dialog.setTitle(getString(R.string.app_name) + " v." + BuildConfig.VERSION_NAME);
         dialog.setMessage(R.string.copyright);
-        dialog.setPositive(R.drawable.star, getString(R.string.rate), new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Dialogs.rate(MainActivity.this);
-            }
-        });
-        dialog.setNegative(R.drawable.google_play, getString(R.string.more_apps), new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(MORE_APPS)));
-            }
-        });
+        dialog.setPositive(R.drawable.star, getString(R.string.rate), view -> Dialogs.rate(MainActivity.this));
+        dialog.setNegative(R.drawable.google_play, getString(R.string.more_apps), view -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(MORE_APPS))));
         dialog.show();
 
     }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#292929</color>
-    <color name="colorPrimaryDark">#212121</color>
+    <color name="colorPrimary">#272727</color>
+    <color name="colorPrimaryDark">#272727</color>
     <color name="colorAccent">#448aff</color>
-    <color name="app_background">#FF252527</color>
-    <color name="dialog_style">#181818</color>
+    <color name="app_background">#212121</color>
+    <color name="dialog_style">#212121</color>
 
 </resources>

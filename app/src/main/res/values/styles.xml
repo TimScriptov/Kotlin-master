@@ -5,6 +5,7 @@
 		<item name="colorPrimary">@color/colorPrimary</item>
 		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 		<item name="colorAccent">@color/colorAccent</item>
+		<item name="android:windowBackground">@color/app_background</item>
         <item name="android:windowAnimationStyle">@style/TransitionStyle</item>
 		<item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
 		<item name="dialog_style">@color/dialog_style</item>
@@ -22,10 +23,7 @@
 		<item name="behavior_skipCollapsed">false</item>
 	</style>
 
-	<style name="toolbar" parent="Theme.AppCompat.DayNight.DarkActionBar">
-		<item name="android:textColorPrimary">@android:color/white</item>
-		<item name="android:textColorSecondary">@android:color/white</item>
-		<item name="android:itemTextAppearance">@style/toolbar.menu</item>
+	<style name="toolbar" parent="ThemeOverlay.AppCompat.DayNight.ActionBar">
 	</style>
 
 	<style name="toolbar.menu" parent="@android:style/TextAppearance.Widget.IconMenu.Item">

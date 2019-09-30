@@ -48,12 +48,7 @@ public class BookmarksFragment extends BottomSheetDialogFragment {
         final SweetViewDialog dialog = new SweetViewDialog(getContext());
         dialog.setTitle(getString(R.string.bookmarks));
         dialog.setView(view);
-        dialog.setPositive(android.R.string.cancel, new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
+        dialog.setPositive(android.R.string.cancel, null);
         return dialog;
     }
 

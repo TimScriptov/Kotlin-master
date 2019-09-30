@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardviewLesson"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="2.5dp"
-    app:cardCornerRadius="6dp"
-    app:cardElevation="1dp">
+    app:cardCornerRadius="4dp"
+    app:strokeColor="#B3C0C0C0"
+    app:strokeWidth="0.5dp"
+    app:cardElevation="0dp">
 
     <LinearLayout
         android:id="@+id/lesson_item"
@@ -39,4 +41,4 @@
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

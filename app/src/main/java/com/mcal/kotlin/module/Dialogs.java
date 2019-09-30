@@ -43,16 +43,13 @@ public class Dialogs {
         SweetViewDialog dialog = new SweetViewDialog(context);
                 dialog.setTitle(R.string.rate);
                 dialog.setView(v);
-                dialog.setPositive(R.string.rate, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (ratingBar.getRating() > 3) {
-                            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(RATE)));
-                            Preferences.setRated();
-                        } else {
-                            App.toast(R.string.thanks);
-                            App.preferences.edit().putBoolean(Constants.IS_RATED, true).apply();
-                        }
+                dialog.setPositive(R.string.rate, v1 -> {
+                    if (ratingBar.getRating() > 3) {
+                        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(RATE)));
+                        Preferences.setRated();
+                    } else {
+                        App.toast(R.string.thanks);
+                        App.preferences.edit().putBoolean(Constants.IS_RATED, true).apply();
                     }
                 });
                 dialog.show();
