@@ -7,9 +7,9 @@
     android:layout_height="wrap_content"
     android:layout_margin="2.5dp"
     app:cardCornerRadius="4dp"
+    app:cardElevation="0dp"
     app:strokeColor="#B3C0C0C0"
-    app:strokeWidth="0.5dp"
-    app:cardElevation="0dp">
+    app:strokeWidth="0.5dp">
 
     <LinearLayout
         android:id="@+id/lesson_item"
@@ -17,9 +17,9 @@
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
         android:clickable="true"
+        android:focusable="true"
         android:gravity="center_vertical"
-        android:padding="8dip"
-        android:focusable="true">
+        android:padding="8dip">
 
         <TextView
             android:id="@+id/text"

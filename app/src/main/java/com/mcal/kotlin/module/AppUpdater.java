@@ -58,7 +58,7 @@ public class AppUpdater extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
         try {
-            if (version_code > 1153/*App.getContext().getPackageManager().getPackageInfo(PACKAGE_NAME, PackageManager.GET_META_DATA).versionCode*/) {
+            if (version_code > 1157/*App.getContext().getPackageManager().getPackageInfo(PACKAGE_NAME, PackageManager.GET_META_DATA).versionCode*/) {
                 updateApp();
             }
         //} catch (PackageManager.NameNotFoundException ignored) {

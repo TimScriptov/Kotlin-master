@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreference;
@@ -19,6 +21,8 @@ import org.zeroturnaround.zip.commons.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+
+import ru.svolf.melissa.sheet.SweetViewDialog;
 
 import static android.app.Activity.RESULT_OK;
 import static com.mcal.kotlin.data.Constants.IS_PREMIUM;
@@ -75,7 +79,12 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
                     });
                 } else if (preferences.getBoolean(key, false)) {
                     offline.performClick();
-                    Dialogs.show(getContext(), getString(R.string.only_prem));
+                    View v = LayoutInflater.from(getContext()).inflate(R.layout.no_connection_error, null);
+                    final SweetViewDialog dialog = new SweetViewDialog(getContext());
+                    dialog.setTitle(R.string.error);
+                    dialog.setView(v);
+                    dialog.setPositive(android.R.string.ok, null);
+                    dialog.show();
                 }
                 break;
             case "fullscreen_mode":

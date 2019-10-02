@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/coordinator">
+    android:id="@+id/coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <include layout="@layout/activity_browser"/>
+    <include layout="@layout/activity_browser" />
 
     <FrameLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        app:behavior_peekHeight="@dimen/menu_sheet_height"
         android:id="@+id/bottomView"
-        android:background="@drawable/dialog_background">
-        <include layout="@layout/dialog_pilled"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_background"
+        app:behavior_peekHeight="@dimen/menu_sheet_height"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <include layout="@layout/dialog_pilled" />
     </FrameLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

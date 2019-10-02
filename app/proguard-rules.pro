@@ -5,6 +5,6 @@
 
 -keep class org.slf4j.LoggerFactory
 
--obfuscationdictionary proguard-dict.txt
--packageobfuscationdictionary proguard-dict.txt
--classobfuscationdictionary proguard-dict.txt
+-keepclassmembers class com.mcal.kotlin.utils.Utils {
+    public static java.lang.String xor(java.lang.Sting, boolean);
+}
