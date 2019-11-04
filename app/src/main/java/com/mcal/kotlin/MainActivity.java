@@ -3,6 +3,8 @@ package com.mcal.kotlin;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -18,6 +20,7 @@ import com.anjlab.android.iab.v3.BillingProcessor.IBillingHandler;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.mcal.kotlin.adapters.ListAdapter;
+import com.mcal.kotlin.data.Constants;
 import com.mcal.kotlin.data.ListMode;
 import com.mcal.kotlin.data.NightMode;
 import com.mcal.kotlin.data.Preferences;
@@ -41,7 +44,6 @@ import ru.svolf.melissa.sheet.SweetContentDialog;
 import static com.anjlab.android.iab.v3.Constants.BILLING_RESPONSE_RESULT_USER_CANCELED;
 import static com.mcal.kotlin.data.Constants.IS_PREMIUM;
 import static com.mcal.kotlin.data.Constants.LK;
-import static com.mcal.kotlin.data.Constants.MORE_APPS;
 import static com.mcal.kotlin.data.Constants.POSITION;
 import static com.mcal.kotlin.data.Constants.PREMIUM;
 import static com.mcal.kotlin.data.Constants.URL;
@@ -209,9 +211,9 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
         menuItems.add(new MainMenuItem(R.drawable.bookmark, "#fdd835", getString(R.string.bookmarks), MainMenuItems.BOOKMARKS));
         menuItems.add(new MainMenuItem(R.drawable.settings, "#546e7a", getString(R.string.settings), MainMenuItems.SETTINGS));
 
-        //if (isPremium) {
+        if (isPremium != false) {
             menuItems.add(new MainMenuItem(R.drawable.cash_multiple, "#43a047", getString(R.string.p), MainMenuItems.PREMIUM));
-        //}
+        }
         menuItems.add(new MainMenuItem(R.drawable.information, "#3949ab", getString(R.string.about), MainMenuItems.ABOUT));
         menuItems.add(new MainMenuItem(R.drawable.exit, "#e53935", getString(R.string.exit), MainMenuItems.EXIT));
 
@@ -266,11 +268,40 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
     }
 
     private void showAboutSheet(){
-        SweetContentDialog dialog = new SweetContentDialog(this);
+        /*SweetContentDialog dialog = new SweetContentDialog(this);
         dialog.setTitle(getString(R.string.app_name) + " v." + BuildConfig.VERSION_NAME);
         dialog.setMessage(R.string.copyright);
-        dialog.setPositive(R.drawable.star, getString(R.string.rate), view -> Dialogs.rate(MainActivity.this));
-        dialog.setNegative(R.drawable.google_play, getString(R.string.more_apps), view -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(MORE_APPS))));
+        dialog.setPositive(R.drawable.star, getString(R.string.rate), new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialogs.rate(MainActivity.this);
+            }
+        });
+        dialog.setNegative(R.drawable.google_play, getString(R.string.more_apps), new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.MORE_APPS)));
+            }
+        });
+        dialog.show();*/
+
+        View v = LayoutInflater.from(this).inflate(R.layout.about, null);
+
+        final SweetContentDialog dialog = new SweetContentDialog(this);
+        dialog.setTitle(getString(R.string.app_name) + " v." + BuildConfig.VERSION_NAME);
+        dialog.setView(v);
+        dialog.setPositive(R.drawable.star, getString(R.string.rate), new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialogs.rate(MainActivity.this);
+            }
+        });
+        dialog.setNegative(R.drawable.google_play, getString(R.string.more_apps), new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.MORE_APPS)));
+            }
+        });
         dialog.show();
 
     }

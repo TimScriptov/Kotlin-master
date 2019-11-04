@@ -71,21 +71,21 @@ public class SweetContentDialog extends BottomSheetDialog {
         mContentView.setText(text);
     }
 
-    public void setMessage(Spanned text){
+    public void setMessage(Spanned text) {
         mContentView.setText(text);
     }
 
-    public void setView(@LayoutRes int resId){
+    public void setView(@LayoutRes int resId) {
         setView(LayoutInflater.from(getContext()).inflate(resId, null));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public void setIcon(@DrawableRes int resId){
-       setIcon(AppCompatResources.getDrawable(mContext, resId));
+    public void setIcon(@DrawableRes int resId) {
+        setIcon(AppCompatResources.getDrawable(mContext, resId));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public void setIcon(Drawable icon){
+    public void setIcon(Drawable icon) {
         mCaption.setCompoundDrawablesRelative(icon, null, null, null);
     }
 

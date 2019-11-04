@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="2.5dp"
-    app:cardCornerRadius="4dp"
-    app:cardElevation="0dp"
-    app:strokeColor="#B3C0C0C0"
-    app:strokeWidth="0.5dp">
+    app:cardCornerRadius="6dp"
+    app:cardElevation="3dp"
+    app:strokeColor="#DD868686"
+    app:strokeWidth="1dp">
 
     <LinearLayout
         android:id="@+id/lesson_item"

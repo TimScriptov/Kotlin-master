@@ -10,7 +10,7 @@ public final class Constants {
     public static final String UPDATE_PATH = Utils.xor("ねひぱぶぶ〼〪〩ぱはとふてぴぬぶぱどび〨ぢはぱのばつ〫はな〩のひ〪づなとっはぢ〩ばぶちでぱっ〫まとな", true); // https://timscriptov.github.io/kt/config/update.xml
     public static final String PREMIUM = BuildConfig.DEBUG ? "android.test.purchased" : Utils.xor("のどぱなぬとずぶぷっとはばに", true); // kotlin_premium
     public static final String INITIALIZE = Utils.xor("てで〨でふぶ〨ぶばつ〨〷〱〷〴〲〼〳〱〴〲〱〱〷〵〳〰へ〶〴〴〰〼〳〱〷〴〾", true); // ca-app-pub-1411495427741055~3216954118
-    public static final String ADMOB_BANNER = Utils.xor("てで〨でふぶ〨ぶばつ〨〷〱〷〴〲〼〳〱〴〲〱〱〷〵〳〰〩〰〿〰〿〵〿〷〳〰〲, true); // ca-app-pub-1411495427741055/5959092554
+    public static final String ADMOB_BANNER = Utils.xor("てで〨でふぶ〨ぶばつ〨〷〱〷〴〲〼〳〱〴〲〱〱〷〵〳〰〩〰〿〰〿〵〿〷〳〰〲", true); // ca-app-pub-1411495427741055/5959092554
     public static final String ADMOB_INTERSTITIAL = Utils.xor("てで〨でふぶ〨ぶばつ〨〷〱〷〴〲〼〳〱〴〲〱〱〷〵〳〰〩〶〴〱〷〵〶〱〾〱〴", true); // ca-app-pub-1411495427741055/3241004842
     public static final String SIGNATURE = Utils.xor("ぶ〱とはついぬだみさちはちみぁねしっぜとおくぶ〾ごぶぉ", true); // s7miaBifzSdidyDkReYnOIs8QpL
     public static final String SIGNATURE2 = Utils.fromBase64("MFI4aVhueVA0TUt6a2JMWDhlaFFoZ1ZPcFFr"); // 0R8iXnyP4MKzkbLX8ehQhgVOpQk

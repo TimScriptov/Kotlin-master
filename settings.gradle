@@ -1,1 +1,1 @@
-include ':app', ':melissa'
+include ':app', ':melissa', ':billing'

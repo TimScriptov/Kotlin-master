@@ -17,8 +17,8 @@ public class SweetViewDialog extends BottomSheetDialog {
     private Context mContext;
     private FrameLayout mContentFrame;
     private TextView mCaption;
-    private Button mPositive, mNegative;
-    private View.OnClickListener positiveSet = null, negativeSet = null;
+    private Button mPositive, mNegative, mNeutral;
+    private View.OnClickListener positiveSet = null, negativeSet = null, neutralSet = null;
 
     public SweetViewDialog(@NonNull Context context) {
         super(context);
@@ -33,6 +33,7 @@ public class SweetViewDialog extends BottomSheetDialog {
         mContentFrame = view.findViewById(R.id.content_frame);
         mPositive = view.findViewById(R.id.positive);
         mNegative = view.findViewById(R.id.negative);
+        mNeutral = view.findViewById(R.id.neutral);
         setContentView(view);
     }
 
@@ -58,6 +59,12 @@ public class SweetViewDialog extends BottomSheetDialog {
         negativeSet = listener;
     }
 
+    public void setNeutral(CharSequence text, View.OnClickListener listener) {
+        mNeutral.setText(text);
+        mNeutral.setOnClickListener(listener);
+        neutralSet = listener;
+    }
+
     public void setPositive(int resId, View.OnClickListener listener) {
         mPositive.setText(resId);
         mPositive.setOnClickListener(listener);
@@ -70,11 +77,18 @@ public class SweetViewDialog extends BottomSheetDialog {
         negativeSet = listener;
     }
 
+    public void setNeutral(int resId, View.OnClickListener listener) {
+        mNeutral.setText(resId);
+        mNeutral.setOnClickListener(listener);
+        neutralSet = listener;
+    }
+
     @Override
     public void show() {
         super.show();
         mNegative.setVisibility(mNegative.getText().toString().isEmpty() ? View.GONE : View.VISIBLE);
         mPositive.setVisibility(mPositive.getText().toString().isEmpty() ? View.GONE : View.VISIBLE);
+        mNeutral.setVisibility(mNeutral.getText().toString().isEmpty() ? View.GONE : View.VISIBLE);
         if (mPositive.getVisibility() == View.VISIBLE && positiveSet == null) {
             mPositive.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -85,6 +99,14 @@ public class SweetViewDialog extends BottomSheetDialog {
         }
         if (mNegative.getVisibility() == View.VISIBLE && negativeSet == null) {
             mNegative.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dismiss();
+                }
+            });
+        }
+        if (mNeutral.getVisibility() == View.VISIBLE && neutralSet == null) {
+            mNeutral.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     dismiss();

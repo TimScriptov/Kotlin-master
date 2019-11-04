@@ -1,7 +1,7 @@
 -keepattributes SourceFile, LineNumberTable
 
 -renamesourcefileattribute SourceFile
--repackageclasses
+-repackageclasses kotlin
 
 -keep class org.slf4j.LoggerFactory
 
