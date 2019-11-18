@@ -8,8 +8,8 @@ android {
         applicationId "com.mcal.kotlin"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 1161
-        versionName "11.6.1"
+        versionCode 1162
+        versionName "11.6.2"
         vectorDrawables.useSupportLibrary true
         multiDexEnabled = true
     }
@@ -44,7 +44,7 @@ dependencies {
 
     // Google libs
     implementation 'com.google.android.material:material:1.0.0'
-    implementation 'com.google.android.gms:play-services-ads:18.2.0'
+    implementation 'com.google.android.gms:play-services-ads:18.3.0'
 
     implementation 'com.github.GrenderG:Toasty:1.4.2'
     implementation 'com.daimajia.swipelayout:library:1.2.0'

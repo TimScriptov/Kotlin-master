@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -196,7 +197,7 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
     }
 
     private void setupBottomSheet(){
-        //TextView caption = findViewById(R.id.caption);
+        TextView caption = findViewById(R.id.caption);
         RecyclerView recycler = findViewById(R.id.list);
         if (recycler.getAdapter() != null){
             recycler.setAdapter(null);
@@ -204,11 +205,11 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
 
         ArrayList<MainMenuItem> menuItems = new ArrayList<>();
 
-        //caption.setText(R.string.caption_lessons);
+        caption.setText(R.string.caption_lessons);
         if (Preferences.getBookmark() != null) {
             menuItems.add(new MainMenuItem(R.drawable.bookmark, "#fad805", getString(R.string.continue_lesson), MainMenuItems.CONTINUE));
         }
-        menuItems.add(new MainMenuItem(R.drawable.bookmark, "#fdd835", getString(R.string.bookmarks), MainMenuItems.BOOKMARKS));
+        menuItems.add(new MainMenuItem(R.drawable.star, "#fdd835", getString(R.string.bookmarks), MainMenuItems.BOOKMARKS));
         menuItems.add(new MainMenuItem(R.drawable.settings, "#546e7a", getString(R.string.settings), MainMenuItems.SETTINGS));
 
         if (isPremium != false) {

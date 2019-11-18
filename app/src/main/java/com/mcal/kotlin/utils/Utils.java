@@ -5,9 +5,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Base64;
 
+import androidx.annotation.Keep;
+
 import com.mcal.kotlin.App;
 
 public class Utils {
+
     public static boolean isNetworkAvailable() {
         ConnectivityManager connection = (ConnectivityManager) App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = connection.getActiveNetworkInfo();
@@ -20,6 +23,7 @@ public class Utils {
         return new String(data);
     }
 
+    @Keep
     public static String xor(String a, boolean b)
     {
         char[] ax = new char[]{'\u3005', '\u3006'};//々
@@ -38,7 +42,7 @@ public class Utils {
         }
     }
 
-    public static String reverseString(String string) {
+    static String reverseString(String string) {
         try {
             return new StringBuilder(string).reverse().toString();
         } catch (Exception e) {
