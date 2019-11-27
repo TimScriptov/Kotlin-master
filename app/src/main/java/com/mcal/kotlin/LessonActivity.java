@@ -31,6 +31,7 @@ import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
 import java.util.concurrent.TimeUnit;
 
 import static com.mcal.kotlin.data.Constants.FILE;
+import static com.mcal.kotlin.data.Constants.IS_PREMIUM;
 import static com.mcal.kotlin.data.Constants.IS_READ;
 import static com.mcal.kotlin.data.Constants.POSITION;
 import static com.mcal.kotlin.data.Constants.TEXT_HTML;
@@ -48,7 +49,7 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
     private CollapsingToolbarLayout ctl;
     private int itemPosition;
 
-    //private boolean isPremium;
+    private boolean isPremium;
 
     @Override
     public void onClick(View p1) {
@@ -109,7 +110,7 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
 
         new PageLoader(getIntent().getStringExtra(URL)).execute();
 
-        //isPremium = getIntent().getBooleanExtra(IS_PREMIUM, false);
+        isPremium = getIntent().getBooleanExtra(IS_PREMIUM, false);
     }
 
     @Override
@@ -124,12 +125,7 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
             final int num = getLessonNumberByUrl(webView.getUrl());
 
             if (!isRead(num)) {
-                Snackbar.make(webView, R.string.mark_as_read, Snackbar.LENGTH_INDEFINITE).setAction(R.string.yes, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View p1) {
-                        markAsRead(num);
-                    }
-                }).show();
+                Snackbar.make(webView, R.string.mark_as_read, Snackbar.LENGTH_INDEFINITE).setAction(R.string.yes, p1 -> markAsRead(num)).show();
             } else super.onBackPressed();
 
         } else super.onBackPressed();
@@ -199,7 +195,7 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
             progressBar.setVisibility(View.VISIBLE);
 
             if (isOffline()) {
-                //if (isPremium) {
+                if (isPremium  || BuildConfig.DEBUG) {
                     if (SignatureUtils.verifySignatureSHA(getApplicationContext()) || BuildConfig.DEBUG) {
                         link = FILE + link;
                         webView.loadDataWithBaseURL(link, HtmlRenderer.renderHtml(FileReader.fromStorage(link.replace(FILE, ""))), TEXT_HTML, UTF_8, link);
@@ -207,7 +203,7 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
                     } else {
                         webView.loadData(html, TEXT_HTML, UTF_8);
                     }
-                //}
+                }
             }
         }
 

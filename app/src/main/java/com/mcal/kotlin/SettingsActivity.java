@@ -19,6 +19,4 @@ public class SettingsActivity extends BaseActivity {
                 .add(R.id.frame_container, new SettingsFragment())
                 .commit();
     }
-
-
 }

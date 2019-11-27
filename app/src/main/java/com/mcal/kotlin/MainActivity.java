@@ -52,7 +52,7 @@ import static com.mcal.kotlin.data.Preferences.isOffline;
 
 public class MainActivity extends BaseActivity implements MainView, SearchView.OnQueryTextListener, IBillingHandler {
 
-    private LinearLayout adLayout;
+    //private LinearLayout adLayout;
     private BillingProcessor billing;
     private ListAdapter listAdapter;
     private Ads ads;
@@ -89,7 +89,7 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
         setContentView(R.layout.activity_main);
 
         sheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bottomView));
-        adLayout = findViewById(R.id.adLayout);
+        //adLayout = findViewById(R.id.adLayout);
         sv = findViewById(R.id.search_bar);
 
         RecyclerView lessons = (RecyclerView) getLayoutInflater().inflate(R.layout.recycler_view, null);
@@ -291,18 +291,8 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
         final SweetContentDialog dialog = new SweetContentDialog(this);
         dialog.setTitle(getString(R.string.app_name) + " v." + BuildConfig.VERSION_NAME);
         dialog.setView(v);
-        dialog.setPositive(R.drawable.star, getString(R.string.rate), new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Dialogs.rate(MainActivity.this);
-            }
-        });
-        dialog.setNegative(R.drawable.google_play, getString(R.string.more_apps), new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MainActivity.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.MORE_APPS)));
-            }
-        });
+        dialog.setPositive(R.drawable.star, getString(R.string.rate), view -> Dialogs.rate(MainActivity.this));
+        dialog.setNegative(R.drawable.google_play, getString(R.string.more_apps), view -> MainActivity.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.MORE_APPS))));
         dialog.show();
 
     }

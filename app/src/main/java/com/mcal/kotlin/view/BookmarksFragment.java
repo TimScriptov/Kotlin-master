@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import ru.svolf.melissa.sheet.SweetViewDialog;
 
 public class BookmarksFragment extends BottomSheetDialogFragment {
-    ArrayList<String> items = new ArrayList<>();
+    private ArrayList<String> items = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,5 +49,4 @@ public class BookmarksFragment extends BottomSheetDialogFragment {
         dialog.setPositive(android.R.string.cancel, null);
         return dialog;
     }
-
 }

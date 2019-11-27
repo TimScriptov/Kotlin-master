@@ -67,14 +67,11 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
                         Dialogs.noConnectionError(getContext());
                     }
                 } else if (isPremium) {
-                    AsyncTask.execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                File resourcesDir = new File(requireActivity().getFilesDir(), RESOURCES);
-                                FileUtils.deleteDirectory(resourcesDir);
-                            } catch (IOException ignored) {
-                            }
+                    AsyncTask.execute(() -> {
+                        try {
+                            File resourcesDir = new File(requireActivity().getFilesDir(), RESOURCES);
+                            FileUtils.deleteDirectory(resourcesDir);
+                        } catch (IOException ignored) {
                         }
                     });
                 } else if (preferences.getBoolean(key, false)) {

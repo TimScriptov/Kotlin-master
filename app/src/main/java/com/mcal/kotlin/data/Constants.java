@@ -13,7 +13,9 @@ public final class Constants {
     public static final String ADMOB_BANNER = Utils.xor("てで〨でふぶ〨ぶばつ〨〷〱〷〴〲〼〳〱〴〲〱〱〷〵〳〰〩〰〿〰〿〵〿〷〳〰〲", true); // ca-app-pub-1411495427741055/5959092554
     public static final String ADMOB_INTERSTITIAL = Utils.xor("てで〨でふぶ〨ぶばつ〨〷〱〷〴〲〼〳〱〴〲〱〱〷〵〳〰〩〶〴〱〷〵〶〱〾〱〴", true); // ca-app-pub-1411495427741055/3241004842
     public static final String SIGNATURE = Utils.xor("ぶ〱とはついぬだみさちはちみぁねしっぜとおくぶ〾ごぶぉ", true); // s7miaBifzSdidyDkReYnOIs8QpL
-    public static final String SIGNATURE2 = Utils.fromBase64("MFI4aVhueVA0TUt6a2JMWDhlaFFoZ1ZPcFFr"); // 0R8iXnyP4MKzkbLX8ehQhgVOpQk
+    public static final String SIGNATURE_256 = Utils.xor("〰っ〼〷〲〵〴ぢ〱〰つで〼〱〴づ〴〿で〿っっ〷〴て〳〶〱つづ〽〿て〾〵〲てづつっ〵〿〳〶でっで〵〷でつ〵だだ〵〿てつだ〳〰〿〳〶", false); // 5e91731d46aa971c19b9fe22c537ac89c804ccae0960beb32aa3ef09cbe55960
+    // not reverse
+    //public static final String SIGNATURE_256 = Utils.xor("〰っ〼〷〲〵〴ぢ〱〰つで〼〱〴づ〴〿で〿っっ〷〴て〳〶〱つづ〽〿て〾〵〲てづつっ〵〿〳〶でっで〵〷でつ〵だだ〵〿てつだ〳〰〿〳〶", false); //
     public static final String DOWNLOAD_ZIP = Utils.xor("ねひぱぶぶ〼〪〩ぱはとふてぴぬぶぱどび〨ぢはぱのばつ〫はな〩どっぶふなとぶ〩のどぱなぬと〫ぼぬぶ", true); // https://timscriptov.github.io/lessons/kotlin.zip
     public static final String RATE = Utils.xor("とでぷねだひ〿〩〪ぢだひつはどふ〺はち〻てどと〨とづつな〫ねなひどはに", true); // market://details?id=com.mcal.kotlin
     public static final String UTF_8 = Utils.xor("ぐげぃ〫〽", true); // UTF-8
@@ -36,6 +38,7 @@ public final class Constants {
     public static final String RSA = Utils.xor("〫ござぇ", true); // .RSA
     public static final String DSA = Utils.xor("〫あざぇ", true); // .DSA
     public static final String SHA = Utils.xor("ざぎい", true); // SHA
+    public static final String SHA_256 = Utils.xor("ざぎい〫〷〳〳", true); // SHA-256
     public static final String MORE_APPS = Utils.xor("とでぷねだひ〿〩〪ふだでぷづね〹ぴ〻ふびで〼㐝㐴㐵㐻〥㐤㐽㐺㐵㑎㐿㐸㐷", true); // market://search?q=pub:Иван Тимашков
     public static final String HTML = Utils.xor("〫のぱにど", true); // .html
     public static final String LESSON_PATH = Utils.xor("〪なだふぶどにす", true); // /lesson_

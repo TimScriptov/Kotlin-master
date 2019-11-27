@@ -10,25 +10,21 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginRight="15dp"
         app:layout_scrollFlags="scroll|enterAlways">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/toolbar_bg">
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/search_bar"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginStart="0dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
+
                 android:layout_toStartOf="@id/button_night"
                 android:layout_toLeftOf="@id/button_night"
-                android:background="@drawable/search_background"
                 app:defaultQueryHint="@string/search"
                 app:iconifiedByDefault="false"
                 app:queryBackground="@null"
@@ -42,9 +38,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
-                android:layout_marginEnd="12dp"
-                android:layout_marginRight="12dp"
-                android:background="@drawable/search_background"
+                android:background="@null"
                 android:padding="12dp"
                 app:srcCompat="@drawable/daynight_schedule"
                 tools:ignore="ContentDescription" />

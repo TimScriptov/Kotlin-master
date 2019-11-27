@@ -91,4 +91,3 @@ public class MCProgressBar extends ProgressBar {
         invalidate();
     }
 }
- 

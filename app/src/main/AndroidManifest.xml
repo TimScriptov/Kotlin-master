@@ -7,7 +7,7 @@
     <!--uses-permission android:name="com.android.vending.BILLING" /-->
 
     <application
-        android:name=".App"
+        android:name="com.mcal.kotlin.App"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -17,7 +17,7 @@
 
         <activity
             android:configChanges="screenSize|orientation"
-            android:name=".MainActivity">
+            android:name="com.mcal.kotlin.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW"/>
@@ -27,17 +27,17 @@
 
         <activity
             android:configChanges="screenSize|orientation"
-            android:name=".LessonActivity"/>
+            android:name="com.mcal.kotlin.LessonActivity"/>
 
         <activity
             android:configChanges="screenSize|orientation"
-            android:name=".SettingsActivity"
+            android:name="com.mcal.kotlin.SettingsActivity"
             android:label="@string/settings"/>
-		
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-1411495427741055~3216954118" />
-            
+
     </application>
 
 </manifest>
