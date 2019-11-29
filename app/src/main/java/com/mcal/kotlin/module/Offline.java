@@ -51,13 +51,10 @@ public class Offline extends AsyncTask<Void, Integer, Boolean> {
         progressDialog.setTitle(settingsActivity.getString(R.string.loading));
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setCancelable(false);
-        progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, settingsActivity.getString(android.R.string.cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                cancel(true);
-                dialogInterface.dismiss();
-                Preferences.setOffline(false);
-            }
+        progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, settingsActivity.getString(android.R.string.cancel), (dialogInterface, i) -> {
+            cancel(true);
+            dialogInterface.dismiss();
+            Preferences.setOffline(false);
         });
         progressDialog.show();
     }

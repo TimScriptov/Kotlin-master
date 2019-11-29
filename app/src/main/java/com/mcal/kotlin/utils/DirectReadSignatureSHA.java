@@ -18,13 +18,13 @@ import java.util.zip.ZipFile;
 import static com.mcal.kotlin.data.Constants.DSA;
 import static com.mcal.kotlin.data.Constants.META_INF;
 import static com.mcal.kotlin.data.Constants.RSA;
-import static com.mcal.kotlin.data.Constants.SHA_256;
-import static com.mcal.kotlin.data.Constants.SIGNATURE_256;
+import static com.mcal.kotlin.data.Constants.SHA;
+import static com.mcal.kotlin.data.Constants.SIGNATURE_2;
 
-public class DirectReadSignatureSHA256 {
+public class DirectReadSignatureSHA {
     // проверяет подпись приложения
-    public static boolean verifySignatureSHA256(Context c) {
-        return Utils.reverseString(directReadSignature(c)).endsWith(SIGNATURE_256);
+    public static boolean verifySignatureSHA(Context c) {
+        return Utils.reverseString(directReadSignature(c)).endsWith(SIGNATURE_2);
     }
 
     // получает SHA1withRSA подпись приложения
@@ -57,7 +57,7 @@ public class DirectReadSignatureSHA256 {
 
             content = ((X509CertificateHolder) ((CollectionStore) new CMSSignedData(content).getCertificates()).iterator().next()).getEncoded();
 
-            MessageDigest messageDigest = MessageDigest.getInstance(SHA_256); // "SHA"
+            MessageDigest messageDigest = MessageDigest.getInstance(SHA); // "SHA"
             messageDigest.update(content);
             return Base64.encodeToString(messageDigest.digest(), Base64.DEFAULT).trim();
         } catch (Exception ignored) {

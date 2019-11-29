@@ -93,12 +93,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             SweetContentDialog dialog = new SweetContentDialog(this);
             dialog.setTitle(newContext.getString(R.string.pref_sys_lang));
             dialog.setMessage(newContext.getString(R.string.lang_changed));
-            dialog.setPositive(R.drawable.done, newContext.getString(android.R.string.ok), new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    restartApplication(BaseActivity.this);
-                }
-            });
+            dialog.setPositive(R.drawable.done, newContext.getString(android.R.string.ok), view -> restartApplication(BaseActivity.this));
             dialog.show();
         }
     }

@@ -2,7 +2,6 @@ package com.mcal.kotlin.module;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -58,7 +57,7 @@ public class AppUpdater extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
         try {
-            if (version_code > 1161/*App.getContext().getPackageManager().getPackageInfo(PACKAGE_NAME, PackageManager.GET_META_DATA).versionCode*/) {
+            if (version_code > 1171/*App.getContext().getPackageManager().getPackageInfo(PACKAGE_NAME, PackageManager.GET_META_DATA).versionCode*/) {
                 updateApp();
             }
         //} catch (PackageManager.NameNotFoundException ignored) {
@@ -70,12 +69,9 @@ public class AppUpdater extends AsyncTask<Void, Void, Void> {
         new AlertDialog.Builder(context)
                 .setTitle(context.getString(R.string.version_available) + " " + version_name)
                 .setMessage(release_notes)
-                .setPositiveButton(R.string.update, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface p1, int p2) {
-                        App.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(download_link)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                        System.exit(0);
-                    }
+                .setPositiveButton(R.string.update, (p1, p2) -> {
+                    App.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(download_link)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    System.exit(0);
                 })
                 .setCancelable(false)
                 .create()

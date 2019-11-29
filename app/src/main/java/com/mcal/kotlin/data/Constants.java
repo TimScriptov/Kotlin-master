@@ -6,16 +6,14 @@ import com.mcal.kotlin.utils.Utils;
 import static com.mcal.kotlin.data.Preferences.isOffline;
 
 public final class Constants {
-    public static final String PACKAGE_NAME = Utils.xor("てどと〨とづつな〫ねなひどはに", true); // com.mcal.kotlin
+    private static final String PACKAGE_NAME = Utils.xor("てどと〨とづつな〫ねなひどはに", true); // com.mcal.kotlin
     public static final String UPDATE_PATH = Utils.xor("ねひぱぶぶ〼〪〩ぱはとふてぴぬぶぱどび〨ぢはぱのばつ〫はな〩のひ〪づなとっはぢ〩ばぶちでぱっ〫まとな", true); // https://timscriptov.github.io/kt/config/update.xml
     public static final String PREMIUM = BuildConfig.DEBUG ? "android.test.purchased" : Utils.xor("のどぱなぬとずぶぷっとはばに", true); // kotlin_premium
     public static final String INITIALIZE = Utils.xor("てで〨でふぶ〨ぶばつ〨〷〱〷〴〲〼〳〱〴〲〱〱〷〵〳〰へ〶〴〴〰〼〳〱〷〴〾", true); // ca-app-pub-1411495427741055~3216954118
     public static final String ADMOB_BANNER = Utils.xor("てで〨でふぶ〨ぶばつ〨〷〱〷〴〲〼〳〱〴〲〱〱〷〵〳〰〩〰〿〰〿〵〿〷〳〰〲", true); // ca-app-pub-1411495427741055/5959092554
     public static final String ADMOB_INTERSTITIAL = Utils.xor("てで〨でふぶ〨ぶばつ〨〷〱〷〴〲〼〳〱〴〲〱〱〷〵〳〰〩〶〴〱〷〵〶〱〾〱〴", true); // ca-app-pub-1411495427741055/3241004842
     public static final String SIGNATURE = Utils.xor("ぶ〱とはついぬだみさちはちみぁねしっぜとおくぶ〾ごぶぉ", true); // s7miaBifzSdidyDkReYnOIs8QpL
-    public static final String SIGNATURE_256 = Utils.xor("〰っ〼〷〲〵〴ぢ〱〰つで〼〱〴づ〴〿で〿っっ〷〴て〳〶〱つづ〽〿て〾〵〲てづつっ〵〿〳〶でっで〵〷でつ〵だだ〵〿てつだ〳〰〿〳〶", false); // 5e91731d46aa971c19b9fe22c537ac89c804ccae0960beb32aa3ef09cbe55960
-    // not reverse
-    //public static final String SIGNATURE_256 = Utils.xor("〰っ〼〷〲〵〴ぢ〱〰つで〼〱〴づ〴〿で〿っっ〷〴て〳〶〱つづ〽〿て〾〵〲てづつっ〵〿〳〶でっで〵〷でつ〵だだ〵〿てつだ〳〰〿〳〶", false); //
+    public static final String SIGNATURE_2 = Utils.fromBase64("czdtaWFCaWZ6U2RpZHlEa1JlWW5PSXM4UXBM"); // s7miaBifzSdidyDkReYnOIs8QpL
     public static final String DOWNLOAD_ZIP = Utils.xor("ねひぱぶぶ〼〪〩ぱはとふてぴぬぶぱどび〨ぢはぱのばつ〫はな〩どっぶふなとぶ〩のどぱなぬと〫ぼぬぶ", true); // https://timscriptov.github.io/lessons/kotlin.zip
     public static final String RATE = Utils.xor("とでぷねだひ〿〩〪ぢだひつはどふ〺はち〻てどと〨とづつな〫ねなひどはに", true); // market://details?id=com.mcal.kotlin
     public static final String UTF_8 = Utils.xor("ぐげぃ〫〽", true); // UTF-8

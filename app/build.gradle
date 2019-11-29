@@ -8,8 +8,8 @@ android {
         applicationId "com.mcal.kotlin"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 1170
-        versionName "11.7.0"
+        versionCode 1171
+        versionName "11.7.1"
         vectorDrawables.useSupportLibrary true
         multiDexEnabled = true
     }

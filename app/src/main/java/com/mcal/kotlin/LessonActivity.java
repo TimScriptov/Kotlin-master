@@ -195,7 +195,7 @@ public class LessonActivity extends BaseActivity implements OnClickListener {
             progressBar.setVisibility(View.VISIBLE);
 
             if (isOffline()) {
-                if (isPremium  || BuildConfig.DEBUG) {
+                if (isPremium != true  || BuildConfig.DEBUG) {
                     if (SignatureUtils.verifySignatureSHA(getApplicationContext()) || BuildConfig.DEBUG) {
                         link = FILE + link;
                         webView.loadDataWithBaseURL(link, HtmlRenderer.renderHtml(FileReader.fromStorage(link.replace(FILE, ""))), TEXT_HTML, UTF_8, link);

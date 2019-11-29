@@ -11,7 +11,7 @@ import androidx.core.view.NestedScrollingChildHelper;
 import androidx.core.view.ViewCompat;
 
 import com.mcal.kotlin.BuildConfig;
-import com.mcal.kotlin.utils.DirectReadSignatureSHA256;
+import com.mcal.kotlin.utils.DirectReadSignatureSHA;
 
 public class NestedWebView extends WebView implements NestedScrollingChild {
     private final int[] mScrollOffset = new int[2];
@@ -40,7 +40,7 @@ public class NestedWebView extends WebView implements NestedScrollingChild {
 
         MotionEvent event = MotionEvent.obtain(ev);
         final int action = MotionEventCompat.getActionMasked(event);
-        if (DirectReadSignatureSHA256.verifySignatureSHA256(getContext()) || BuildConfig.DEBUG) {
+        if (DirectReadSignatureSHA.verifySignatureSHA(getContext()) || BuildConfig.DEBUG) {
             if (action == MotionEvent.ACTION_DOWN) {
                 mNestedOffsetY = 0;
             }
