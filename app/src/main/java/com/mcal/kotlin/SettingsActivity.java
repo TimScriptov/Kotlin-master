@@ -16,7 +16,7 @@ public class SettingsActivity extends BaseActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.frame_container, new SettingsFragment())
+                .add(R.id.frame_container, new com.mcal.kotlin.SettingsFragment())
                 .commit();
     }
 }

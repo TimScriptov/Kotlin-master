@@ -11,12 +11,9 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.mcal.kotlin.App;
 import com.mcal.kotlin.R;
-import com.mcal.kotlin.data.Constants;
 import com.mcal.kotlin.data.Preferences;
 
 import ru.svolf.melissa.sheet.SweetViewDialog;
-
-import static com.mcal.kotlin.data.Constants.RATE;
 
 public class Dialogs {
     public static void noConnectionError(final Context context) {
@@ -25,7 +22,9 @@ public class Dialogs {
         final SweetViewDialog dialog = new SweetViewDialog(context);
         dialog.setTitle(R.string.error);
         dialog.setView(v);
-        dialog.setPositive(android.R.string.ok, null);
+        dialog.setPositive(android.R.string.ok, v1 -> {
+            dialog.cancel();
+        });
         dialog.show();
     }
 
@@ -41,18 +40,23 @@ public class Dialogs {
         final RatingBar ratingBar = v.findViewById(R.id.rating_bar);
 
         SweetViewDialog dialog = new SweetViewDialog(context);
-                dialog.setTitle(R.string.rate);
-                dialog.setView(v);
-                dialog.setPositive(R.string.rate, v1 -> {
-                    if (ratingBar.getRating() > 3) {
-                        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(RATE)));
-                        Preferences.setRated();
-                    } else {
-                        App.toast(R.string.thanks);
-                        App.preferences.edit().putBoolean(Constants.IS_RATED, true).apply();
-                    }
-                });
-                dialog.show();
+        dialog.setTitle(R.string.rate);
+        dialog.setView(v);
+        dialog.setPositive(R.string.rate, v1 -> {
+            if (ratingBar.getRating() > 3) {
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.mcal.kotlin")));
+                Preferences.setRated();
+                dialog.cancel();
+            } else {
+                App.toast(R.string.thanks);
+                App.preferences.edit().putBoolean("isRated", true).apply();
+                dialog.cancel();
+            }
+        });
+        dialog.setNegative(android.R.string.cancel, v1 -> {
+            dialog.cancel();
+        });
+        dialog.show();
     }
 
     public static void error(Context c, String text) {

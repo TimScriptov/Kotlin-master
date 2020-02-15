@@ -39,7 +39,7 @@ public class BookmarksFragment extends BottomSheetDialogFragment {
         if (items.size() > 0) {
             RecyclerView rcview = view.findViewById(R.id.bookmarksList);
             rcview.setLayoutManager(new LinearLayoutManager(getActivity()));
-            rcview.setAdapter(new BookmarksAdapter(items, this, (MainView) getActivity()));
+            rcview.setAdapter(new BookmarksAdapter(items, this, (com.mcal.kotlin.view.MainView) getActivity()));
             rcview.setVisibility(View.VISIBLE);
         } else view.findViewById(R.id.no_bookmarks).setVisibility(View.VISIBLE);
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">初探Android</string>
+    <string name="app_name">Kotlin</string>
     <string name="about">关于</string>
     <string name="settings">设置</string>
     <string name="version">版本：</string>
@@ -13,8 +13,7 @@
     <string name="appearance">外观</string>
     <string name="font_size">大小</string>
     <string name="font">字体</string>
-    <string name="copyright">©2018–2019 Иван Тимашков</string>
-    <string name="source">源 - startandroid.ru</string>
+    <string name="copyright">©2018–2020 Иван Тимашков</string>
     <string name="grid_view">网格视图</string>
     <string name="bookmarks">书签</string>
     <string name="fullscreen_mode">全屏模式</string>
@@ -41,7 +40,6 @@
     <string name="no_bookmarks">没有书签</string>
     <string name="navigation_drawer_open">打开侧边栏</string>
     <string name="navigation_drawer_close">关闭侧边栏</string>
-    <string name="version_nav_header">版本 11.5.3</string>
     <string name="thanks">谢谢！</string>
     <string name="version_available">可用版本</string>
     <string name="ads_blocked">我们发现你在屏蔽广告！不买专业版你将不能使用这个应用程序。</string>

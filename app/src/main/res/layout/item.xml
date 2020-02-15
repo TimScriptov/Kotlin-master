@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/lesson_item"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:clickable="true"
         android:focusable="true"
         android:gravity="center_vertical"
@@ -18,9 +18,10 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="2.5dp"
-        android:background="@drawable/item_bg">
+        android:background="@drawable/item_bg"
+        tools:ignore="UselessParent">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -31,7 +32,7 @@
             android:textColor="@color/colorPrimary"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/checkMark"
             android:layout_width="18dp"
             android:layout_height="18dp"

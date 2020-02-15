@@ -1,40 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <lessons>
-
-    <lesson>Урок 1. Добро пожаловать в Kotlin!</lesson>
-    <lesson>Урок 2. Базовый синтаксис</lesson>
-    <lesson>Урок 3. Переменные</lesson>
-    <lesson>Урок 4. Базовые типы</lesson>
-    <lesson>Урок 5. Символы и строки</lesson>
-    <lesson>Урок 6. Литералы и константы</lesson>
-    <lesson>Урок 7. Вывод</lesson>
-    <lesson>Урок 8. Ввод</lesson>
-    <lesson>Урок 9. Комментарии</lesson>
-    <lesson>Урок 10. Арифметические операции</lesson>
-    <lesson>Урок 11. Инкремент и декремент</lesson>
-    <lesson>Урок 12. Строковые шаблоны</lesson>
-    <lesson>Урок 13. Время практики: основы</lesson>
-    <lesson>Урок 14. Операторы: if и else</lesson>
-    <lesson>Урок 15. Операторы: if-else-if</lesson>
-    <lesson>Урок 16. Логические операторы</lesson>
-    <lesson>Урок 17. Выражение when</lesson>
-    <lesson>Урок 18. Цикл while</lesson>
-    <lesson>Урок 19. Цикл do-while</lesson>
-    <lesson>Урок 20. return, break и continue</lesson>
-    <lesson>Урок 21. Массивы</lesson>
-    <lesson>Урок 22. Интервалы</lesson>
-    <lesson>Урок 23. Цикл for</lesson>
-    <lesson>Урок 24. Использование циклов с массивами</lesson>
-    <lesson>Урок 25. Время практики: Циклы и Массивы</lesson>
-    <lesson>Урок 26. Функции</lesson>
-    <lesson>Урок 27. Параметры функции</lesson>
-    <lesson>Урок 28. Аргументы функции по умолчанию</lesson>
-    <lesson>Урок 29. Проверка типов и автоматическое копирование</lesson>
-    <lesson>Урок 30. Неверные типы</lesson>
-    <lesson>Урок 31. Классы</lesson>
-    <lesson>Урок 32. Свойства</lesson>
-    <lesson>Урок 33. Функции-члены</lesson>
-    <lesson>Урок 34. Getters и Setters</lesson>
-    <lesson>Урок 35. Первичный конструктор</lesson>
-    <lesson>Урок 36. Блок инициализатора</lesson>
+	<lesson>Урок 1. Добро пожаловать в Kotlin!</lesson>
+	<lesson>Урок 2. Базовый синтаксис</lesson>
+	<lesson>Урок 3. Переменные</lesson>
+	<lesson>Урок 4. Базовые типы</lesson>
+	<lesson>Урок 5. Символы и строки</lesson>
+	<lesson>Урок 6. Литералы и константы</lesson>
+	<lesson>Урок 7. Вывод</lesson>
+	<lesson>Урок 8. Ввод</lesson>
+	<lesson>Урок 9. Комментарии</lesson>
+	<lesson>Урок 10. Арифметические операции</lesson>
+	<lesson>Урок 11. Инкремент и декремент</lesson>
+	<lesson>Урок 12. Строковые шаблоны</lesson>
+	<lesson>Урок 13. Время практики: основы</lesson>
+	<lesson>Урок 14. Операторы: if и else</lesson>
+	<lesson>Урок 15. Операторы: if-else-if</lesson>
+	<lesson>Урок 16. Логические операторы</lesson>
+	<lesson>Урок 17. Выражение when</lesson>
+	<lesson>Урок 18. Цикл while</lesson>
+	<lesson>Урок 19. Цикл do-while</lesson>
+	<lesson>Урок 20. return, break и continue</lesson>
+	<lesson>Урок 21. Массивы</lesson>
+	<lesson>Урок 22. Интервалы</lesson>
+	<lesson>Урок 23. Цикл for</lesson>
+	<lesson>Урок 24. Использование циклов с массивами</lesson>
+	<lesson>Урок 25. Время практики: Циклы и Массивы</lesson>
+	<lesson>Урок 26. Функции</lesson>
+	<lesson>Урок 27. Параметры функции</lesson>
+	<lesson>Урок 28. Аргументы функции по умолчанию</lesson>
+	<lesson>Урок 29. Проверка типов и автоматическое копирование</lesson>
+	<lesson>Урок 30. Неверные типы</lesson>
+	<lesson>Урок 31. Классы</lesson>
+	<lesson>Урок 32. Свойства</lesson>
+	<lesson>Урок 33. Функции-члены</lesson>
+	<lesson>Урок 34. Getters и Setters</lesson>
+	<lesson>Урок 35. Первичный конструктор</lesson>
+	<lesson>Урок 36. Блок инициализатора</lesson>
 </lessons>

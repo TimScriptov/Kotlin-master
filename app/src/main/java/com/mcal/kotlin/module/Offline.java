@@ -1,5 +1,6 @@
 package com.mcal.kotlin.module;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -13,22 +14,17 @@ import org.zeroturnaround.zip.commons.FileUtilsV2_2;
 
 import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
 import es.dmoral.toasty.Toasty;
 
-import static com.mcal.kotlin.data.Constants.DOWNLOAD_ZIP;
-import static com.mcal.kotlin.data.Constants.OFFLINE_ZIP;
-import static com.mcal.kotlin.data.Constants.RESOURCES;
-
 public class Offline extends AsyncTask<Void, Integer, Boolean> {
+    @SuppressLint("StaticFieldLeak")
     private Activity settingsActivity;
     private ProgressDialog progressDialog;
 
@@ -39,9 +35,9 @@ public class Offline extends AsyncTask<Void, Integer, Boolean> {
 
     private void deleteResources() {
         try {
-            File resourcesDir = new File(settingsActivity.getPackageName(), RESOURCES);
+            File resourcesDir = new File(settingsActivity.getPackageName(), "resources");
             FileUtilsV2_2.deleteDirectory(resourcesDir);
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
     }
 
@@ -63,14 +59,14 @@ public class Offline extends AsyncTask<Void, Integer, Boolean> {
     protected Boolean doInBackground(Void... voids) {
         try {
             try {
-                URL url = new URL(DOWNLOAD_ZIP);
+                URL url = new URL("https://timscriptov.github.io/lessons/kotlin.zip");
                 URLConnection connection = url.openConnection();
 
                 progressDialog.setMax(connection.getContentLength());
                 progressDialog.show();
 
-                File offline = new File(settingsActivity.getFilesDir(), OFFLINE_ZIP);
-                File resourcesDir = new File(settingsActivity.getFilesDir(), RESOURCES);
+                File offline = new File(settingsActivity.getFilesDir(), "offline.zip");
+                File resourcesDir = new File(settingsActivity.getFilesDir(), "resources");
 
                 InputStream inputStream = new BufferedInputStream(connection.getInputStream());
                 OutputStream outputStream = new FileOutputStream(offline);
@@ -89,10 +85,6 @@ public class Offline extends AsyncTask<Void, Integer, Boolean> {
                 offline.delete();
                 progressDialog.dismiss();
                 return true;
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }

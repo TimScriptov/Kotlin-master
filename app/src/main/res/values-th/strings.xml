@@ -14,7 +14,7 @@
     <string name="appearance">Appearance</string>
     <string name="font_size">ขนาด</string>
     <string name="font">Font</string>
-    <string name="copyright">©2018-2019 Ivan Timashkov</string>
+    <string name="copyright">©2018–2020 Ivan Timashkov</string>
     <string name="grid_view">มุมมองแบบ Grid</string>
     <string name="bookmarks">Bookmarks</string>
     <string name="fullscreen_mode">โหมดเต็มจอ</string>
@@ -41,7 +41,6 @@
     <string name="no_bookmarks">No bookmarks</string>
     <string name="navigation_drawer_open">Open drawer</string>
     <string name="navigation_drawer_close">Close drawer</string>
-    <string name="version_nav_header">Version 11.5.3</string>
     <string name="thanks">ขอบคุณ!</string>
     <string name="version_available">Version %s ใหม่มาแล้ว</string>
     <string name="ads_blocked">We have determined that you\'re blocking ads! You can\'t use this app without ads if you haven\'t bought Premium!</string>

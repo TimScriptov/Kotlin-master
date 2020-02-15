@@ -6,17 +6,34 @@ android {
 
     defaultConfig {
         applicationId "com.mcal.kotlin"
-        minSdkVersion 16
+        minSdkVersion 23
         targetSdkVersion 29
-        versionCode 1171
-        versionName "11.7.1"
+        versionCode 1174
+        versionName "11.7.4"
         vectorDrawables.useSupportLibrary true
         multiDexEnabled = true
+    }
+    signingConfigs {
+        releaseConfig {
+            keyAlias 'timscriptov@gmail.com'
+            keyPassword 'extreme2018'
+            storeFile file('../timscriptov@gmail.com.keystore')
+            storePassword 'extreme2018'
+
+            v2SigningEnabled true
+        }
     }
     buildTypes {
         release {
             minifyEnabled true
             shrinkResources true
+            signingConfig signingConfigs.releaseConfig
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.releaseConfig
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -34,7 +51,7 @@ android {
 
 dependencies {
     implementation project(path: ':melissa')
-    implementation project(path: ':billing')
+    //implementation project(path: ':billing')
 
     // Android libs
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -43,12 +60,12 @@ dependencies {
     implementation 'androidx.preference:preference:1.1.0'
 
     // Google libs
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0'
     implementation 'com.google.android.gms:play-services-ads:18.3.0'
 
     implementation 'com.github.GrenderG:Toasty:1.4.2'
     implementation 'com.daimajia.swipelayout:library:1.2.0'
-    //implementation 'com.anjlab.android.iab.v3:library:1.1.0'
+    implementation 'com.anjlab.android.iab.v3:library:1.1.0'
     implementation 'com.madgag.spongycastle:pkix:1.54.0.0'
 
     implementation 'org.zeroturnaround:zt-zip:1.13'

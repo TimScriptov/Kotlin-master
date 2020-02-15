@@ -3,7 +3,6 @@ package com.mcal.kotlin.module;
 import com.mcal.kotlin.App;
 import com.mcal.kotlin.R;
 import com.mcal.kotlin.adapters.ListAdapter;
-import com.mcal.kotlin.data.Constants;
 import com.mcal.kotlin.view.MainView;
 
 import org.w3c.dom.Document;
@@ -28,7 +27,7 @@ public class ListParser {
                 DocumentBuilder builder = dbf.newDocumentBuilder();
                 Document doc = builder.parse(is);
                 is.close();
-                NodeList lessons = doc.getElementsByTagName(Constants.LESSON);
+                NodeList lessons = doc.getElementsByTagName("lesson");
                 for (int x = 0; x < lessons.getLength(); x++) {
                     items.add(lessons.item(x).getTextContent());
                 }
