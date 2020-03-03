@@ -1,38 +1,68 @@
 package com.mcal.kotlin.module;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 
-import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatTextView;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.mcal.kotlin.App;
 import com.mcal.kotlin.R;
 import com.mcal.kotlin.data.Preferences;
+import com.mcal.kotlin.model.BaseActivity;
 
 import ru.svolf.melissa.sheet.SweetViewDialog;
 
-public class Dialogs {
+public class Dialogs extends BaseActivity {
+    @SuppressLint("WrongConstant")
     public static void noConnectionError(final Context context) {
-        View v = LayoutInflater.from(context).inflate(R.layout.no_connection_error, null);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout ll = new LinearLayout(context);
+        ll.setOrientation(LinearLayout.VERTICAL);
+        ll.setPadding(40, 0, 40, 0);
+        ll.setLayoutParams(layoutParams);
+        final TextInputLayout til0 = new TextInputLayout(context);
+        final AppCompatTextView message = new AppCompatTextView(context);
+        message.setText(R.string.no_connection);
+        til0.addView(message);
+        ll.addView(til0);
 
         final SweetViewDialog dialog = new SweetViewDialog(context);
         dialog.setTitle(R.string.error);
-        dialog.setView(v);
+        dialog.setView(ll);
         dialog.setPositive(android.R.string.ok, v1 -> {
             dialog.cancel();
         });
         dialog.show();
     }
 
-    public static void show(Context c, String text) {
-        new AlertDialog.Builder(c)
-                .setMessage(text)
-                .setPositiveButton(android.R.string.ok, null)
-                .create().show();
+    @SuppressLint("WrongConstant")
+    public static void show(final Context context, String text) {
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout ll = new LinearLayout(context);
+        ll.setOrientation(LinearLayout.VERTICAL);
+        ll.setPadding(40, 0, 40, 0);
+        ll.setLayoutParams(layoutParams);
+        final TextInputLayout til0 = new TextInputLayout(context);
+        final AppCompatTextView message = new AppCompatTextView(context);
+        message.setText(text);
+        til0.addView(message);
+        ll.addView(til0);
+
+        final SweetViewDialog dialog = new SweetViewDialog(context);
+        //dialog.setTitle();
+        dialog.setView(ll);
+        dialog.setPositive(android.R.string.ok, v1 -> {
+            dialog.cancel();
+        });
+        dialog.show();
     }
 
     public static void rate(final Context context) {
@@ -44,7 +74,7 @@ public class Dialogs {
         dialog.setView(v);
         dialog.setPositive(R.string.rate, v1 -> {
             if (ratingBar.getRating() > 3) {
-                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.mcal.kotlin")));
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.startandroid")));
                 Preferences.setRated();
                 dialog.cancel();
             } else {
@@ -59,11 +89,25 @@ public class Dialogs {
         dialog.show();
     }
 
-    public static void error(Context c, String text) {
-        new AlertDialog.Builder(c)
-                .setMessage(text)
-                .setPositiveButton(android.R.string.ok, null)
-                .setCancelable(true)
-                .create().show();
+    @SuppressLint("WrongConstant")
+    public static void error(final Context context, String text) {
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout ll = new LinearLayout(context);
+        ll.setOrientation(LinearLayout.VERTICAL);
+        ll.setPadding(40, 0, 40, 0);
+        ll.setLayoutParams(layoutParams);
+        final TextInputLayout til0 = new TextInputLayout(context);
+        final AppCompatTextView message = new AppCompatTextView(context);
+        message.setText(text);
+        til0.addView(message);
+        ll.addView(til0);
+
+        final SweetViewDialog dialog = new SweetViewDialog(context);
+        //dialog.setTitle();
+        dialog.setView(ll);
+        dialog.setPositive(android.R.string.ok, v1 -> {
+            dialog.cancel();
+        });
+        dialog.show();
     }
 }

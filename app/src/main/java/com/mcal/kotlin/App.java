@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.mcal.kotlin.data.Database;
-import com.mcal.kotlin.module.Ads;
 
 import es.dmoral.toasty.Toasty;
 
@@ -34,7 +33,6 @@ public class App extends Application {
         super.onCreate();
         context = this;
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        Ads.initialize(this);
         new Database();
     }
 }

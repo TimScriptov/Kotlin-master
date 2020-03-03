@@ -4,14 +4,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,12 +20,12 @@ import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.BillingProcessor.IBillingHandler;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.textfield.TextInputLayout;
 import com.mcal.kotlin.adapters.ListAdapter;
 import com.mcal.kotlin.data.ListMode;
 import com.mcal.kotlin.data.NightMode;
 import com.mcal.kotlin.data.Preferences;
 import com.mcal.kotlin.model.BaseActivity;
-import com.mcal.kotlin.module.Ads;
 import com.mcal.kotlin.module.AppUpdater;
 import com.mcal.kotlin.module.Dialogs;
 import com.mcal.kotlin.module.ListParser;
@@ -48,13 +47,9 @@ import static com.mcal.kotlin.data.Constants.PREMIUM;
 import static com.mcal.kotlin.data.Preferences.isOffline;
 
 public class MainActivity extends BaseActivity implements MainView, SearchView.OnQueryTextListener, IBillingHandler {
-
-    //private LinearLayout adLayout;
     private BillingProcessor billing;
     private ListAdapter listAdapter;
-    private Ads ads;
     private BottomSheetBehavior sheetBehavior;
-    private boolean isAdsBlocked = false;
     private boolean isPremium;
     private SearchView sv;
 
@@ -104,7 +99,6 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
         setupSearchView();
         setupBottomSheet();
 
-        ads = new Ads();
         billing = new BillingProcessor(this, LK, this);
         if (savedInstanceState == null)
             sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
@@ -144,9 +138,6 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
             }
 
             if (!Preferences.isRated()) Dialogs.rate(this);
-            else if (!billing.isPurchased(PREMIUM)) {
-                //ads.showInsAd();
-            }
         }
     }
 
@@ -171,31 +162,15 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
     public void onBillingError(int errorCode, @Nullable Throwable error) {
         if (errorCode == BILLING_RESPONSE_RESULT_USER_CANCELED) {
             Toasty.error(this, getString(R.string.purchase_canceled)).show();
-            if (isAdsBlocked) System.exit(0);
         }
     }
 
     @Override
     public void onBillingInitialized() {
         if (!billing.isPurchased(PREMIUM)) {
-            //adLayout.addView(ads.getBanner(this));
-            ads.loadInterstitial(this);
             // FIXME: Рефрешнуть адаптер
             setupBottomSheet();
-            if (!billing.isPurchased(PREMIUM) & !ads.isAdsLoading()) {
-                isAdsBlocked = true;
-                adsBlocked();
-            }
         }
-    }
-
-    public void adsBlocked() {
-        new AlertDialog.Builder(this)
-                .setMessage(R.string.ads_blocked)
-                .setPositiveButton(R.string.buy, (dialog, which) -> billing.purchase(MainActivity.this, PREMIUM))
-                .setNegativeButton(R.string.close, (dialog, which) -> System.exit(0))
-                .setCancelable(false)
-                .create().show();
     }
 
     private void setupBottomSheet() {
@@ -204,7 +179,6 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
         if (recycler.getAdapter() != null) {
             recycler.setAdapter(null);
         }
-
         ArrayList<MainMenuItem> menuItems = new ArrayList<>();
 
         caption.setText(R.string.caption_lessons);
@@ -272,18 +246,28 @@ public class MainActivity extends BaseActivity implements MainView, SearchView.O
         });
     }
 
-    private void showAboutSheet() {
-        View v = LayoutInflater.from(this).inflate(R.layout.about, null);
+    public void showAboutSheet() {
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout ll = new LinearLayout(this);
+        ll.setOrientation(LinearLayout.VERTICAL);
+        ll.setPadding(40, 0, 40, 0);
+        ll.setLayoutParams(layoutParams);
+        final TextInputLayout til0 = new TextInputLayout(this);
+        final AppCompatTextView message = new AppCompatTextView(this);
+        message.setGravity(1);
+        message.setText(R.string.copyright);
+        til0.addView(message);
+        ll.addView(til0);
 
         final SweetContentDialog dialog = new SweetContentDialog(this);
-        dialog.setTitle(getString(R.string.app_name) + " v." + BuildConfig.VERSION_NAME);
-        dialog.setView(v);
-        dialog.setPositive(R.drawable.star, getString(R.string.rate), view -> {
+        dialog.setTitle(this.getString(R.string.app_name) + " v." + BuildConfig.VERSION_NAME);
+        dialog.setView(ll);
+        dialog.addAction(R.drawable.star, this.getString(R.string.rate), view -> {
             Dialogs.rate(this);
             dialog.cancel();
         });
-        dialog.setNegative(R.drawable.google_play, getString(R.string.more_apps), view -> {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:Иван Тимашков")));
+        dialog.addAction(R.drawable.google_play, this.getString(R.string.more_apps), view -> {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:РРІР°РЅ РўРёРјР°С€РєРѕРІ")));
             dialog.cancel();
         });
         dialog.show();
